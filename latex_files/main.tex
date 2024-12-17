@@ -1,0 +1,205 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\usepackage{amsmath}
+\usepackage{physics}
+\usepackage{dsfont}
+\usepackage{graphicx}
+
+\let\vec\mathbf
+
+\geometry{margin = 2.5cm}
+
+\title{Analytical Approximations of Vacuum Magnetic Fields in Tokamaks}
+\author{Alexander Prokopyshyn}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Magnetic field produced by a vertical wire centred at the origin}
+
+The magnetic field produce by a vertical wire, centred at the origin, with current, \(I\) which points in the 
+\(\vec{\hat{h}}\) direction and extends from \(-h_{min}, h_{max}\) is given by the following Biot-Savart law expression:
+\[\begin{aligned}
+    \vec{B}_{v}(R, \phi, h) &= \frac{\mu_0 I}{4\pi}\int_{h_{min}}^{h_{max}}\frac{\vec{dh'}\cross(R\vec{\hat{R}} + (h-h')\vec{\hat{h}})}{\qty(R^2+(h-h')^2)^{3/2}} \\
+    &= \frac{\mu_0 I}{4\pi}\int_{h_{min}}^{h_{max}}\frac{Rdh'\vec{\hat{\phi}}}{\qty(R^2+(h-h')^2)^{3/2}}.
+\end{aligned}
+\]
+Let
+\[\cos\theta = \frac{R}{\sqrt{R^2+(h-h')^2}},\]
+\[\implies \sin\theta = \frac{h-h'}{\sqrt{R^2+(h-h')^2}},\]
+\[\implies \tan \theta = \frac{h-h'}{R},\]
+\[\implies h' = h - R\tan\theta,\]
+\[\implies dh' = -R\sec^2\theta d\theta.\]
+Hence
+\[
+\boxed{\begin{aligned}
+    \vec{B}_{v}(R, \phi, h) &= -\frac{\mu_0 I}{4\pi R}\int_{h_{min}}^{h_{max}}\cos\theta d\theta\vec{\hat{\phi}}\\
+    &= \frac{\mu_0 I}{4\pi R}\qty[-\sin\theta]_{h_{min}}^{h_{max}}\vec{\hat{\phi}}\\
+    &= \frac{\mu_0 I}{4\pi R}\qty[\frac{h_{max}-h}{\sqrt{R^2+(h_{max}-h)^2}} + \frac{h-h_{min}}{\sqrt{R^2+(h-h_{min})^2}}]\vec{\hat{\phi}}.
+\end{aligned}}\]
+
+\section{Vacuum Field from Vertical Wires in Picture-Frame TF Coils}
+
+To calculate the vacuum magnetic field induced by the vertical wires in the picture-frame toroidal
+field coils of a Tokamak, it is convenient to express the field as a complex function, \( B_{v,c} \).
+In this representation, the real and imaginary parts correspond to the \( x \)- and \( y \)-components
+of the magnetic field, respectively. Furthermore, the radial and ahimuthal components can be obtained
+from the real and imaginary parts of \( e^{-i\phi} B_{v,c} \), respectively.
+Let
+\[z = x + i y = R\exp(i\phi),\]
+\[\bar{z} = x - iy = R \exp(-i\phi).\]
+Hence,
+\[B_{v,c}(z; h) = i\frac{\mu_0I}{4\pi}\frac{z}{\abs{z}^2}\qty[\frac{h_{max}-h}{\sqrt{|z|^2+(h_{max}-h)^2}} + \frac{h-h_{min}}{\sqrt{|z|^2+(h-h_{min})^2}}].\]
+Let
+\[z_k = R_0 e^{i\phi_k}.\]
+Subsituting $z\rightarrow z- z_k$ above gives
+\[B_{v,c}(z-z_k; h) = i\frac{\mu_0I}{4\pi}\frac{z-z_k}{\abs{z-z_k}^2}\qty[\frac{h_{max}-h}{\sqrt{|z-z_k|^2+(h_{max}-h)^2}} + \frac{h-h_{min}}{\sqrt{|z-z_k|^2+(h-h_{min})^2}}].\]
+Let
+\[\phi_k = 2\pi\frac{k}{N},\]
+where $N$ equals the number of toroidal field (TF) coils. Hence, the magnetic field given a complete set of vertical wires
+in the picture frame TF coils at $R=R_0$ is given by
+\[B_{v,\Sigma,c}(z; h, R_0) = i\frac{\mu_0I}{4\pi}\sum_{k=0}^{N-1}\frac{z-z_k}{\abs{z-z_k}^2}\qty[\frac{h_{max}-h}{\sqrt{|z-z_k|^2+(h_{max}-h)^2}} + \frac{h-h_{min}}{\sqrt{|z-z_k|^2+(h-h_{min})^2}}].\]
+At this stage it convenient to define a new function
+\[B_{v,\Sigma,c,p}(z) = B_{v,\Sigma,c}(z)\exp(-i\phi),\]
+where the $p$ stands for polar. Note that the real and imaginary components of $B_{v,\Sigma,c}$ give
+the $x$ and $y$ components of the magnetic field, while the real and imaginary components of $B_{v,\Sigma,c,p}$
+give the radial and azimuthal components of the magnetic field.
+
+We now wish to express $B_{v,\Sigma,c,p}$ as a fourier series given by
+\[B_{v,\Sigma,c,p}(z)=\sum_{n=-\infty}^\infty B_n(R) e^{in\phi}.\]
+Note that
+\[\begin{aligned}
+B_n &= \frac{1}{2\pi}\int_0^{2\pi} B_{v,\Sigma,c,p}(z) e^{-in\phi}d\phi \\
+&=\begin{cases}
+    0 & \text{if } n \bmod N \ne 0, \\
+    iN\frac{\mu_0I}{8\pi^2}\int_0^{2\pi}\frac{z-R_0}{\abs{z-R_0}^2}e^{-i\phi}\qty[\frac{h_{max}-h}{\sqrt{|z-R_0|^2+(h_{max}-h)^2}} + \frac{h-h_{min}}{\sqrt{|z-R_0|^2+(h-h_{min})^2}}]e^{-in\phi}d\phi & \text{if } n \bmod N = 0,
+\end{cases}
+\end{aligned}\]
+where we have used the fact that $B_{v,\Sigma, c}(R, \phi) = B_{v,\Sigma, c}(R, \phi + \phi_k)$.
+We now want to calculate this integral which is quite tricky so we will first consider the simpler scenario
+where $h_{max},-h_{min}\rightarrow\infty$.
+
+% We now wish to express $B_{v,\Sigma,c}$ as a fourier series given by
+% \[B_{v,\Sigma,c}(z; h, R_0)=\sum_{n=-\infty}^\infty B_{n}(R; h, R_0) e^{in\phi}.\]
+% Note that
+% \[\begin{aligned}
+% B_{n}(R; h, R_0) &= \frac{1}{2\pi}\int_0^{2\pi} B_{v,\Sigma,c}(z; h, R_0) e^{-in\phi}d\phi \\
+% &=\begin{cases}
+%     0 & \text{if } n \bmod N \ne 0, \\
+%     iN\frac{\mu_0I}{8\pi^2}\int_0^{2\pi}\frac{z-R_0}{\abs{z-R_0}^2}\qty[\frac{h_{max}-h}{\sqrt{|z-R_0|^2+(h_{max}-h)^2}} + \frac{h-h_{min}}{\sqrt{|z-R_0|^2+(h-h_{min})^2}}]e^{-in\phi}d\phi & \text{if } n \bmod N = 0,
+% \end{cases}
+% \end{aligned}\]
+% where we have used the fact that $B_{v,\Sigma, c}(R, \phi) = B_{v,\Sigma, c}(R, \phi + \phi_k)$.
+% We now want to calculate this integral which is quite tricky so we will first consider the simpler scenario
+% where $h_{max},-h_{min}\rightarrow\infty$.
+
+\subsection{$B_{n}$ for case where $h_{max},-h_{min}\rightarrow\infty$}
+\label{sec:case_where_h_max_infinite}
+
+\[B_{n}(R) = iN\frac{\mu_0I}{4\pi^2}\int_0^{2\pi}\frac{z-R_0}{\abs{z-R_0}^2}e^{-i\phi}e^{-in\phi}d\phi.\]
+
+Let
+\[Z=e^{i\phi},\]
+\[\implies d\phi = \frac{dZ}{iZ},\]
+\[z=RZ.\]
+Note that
+\[\frac{z-R_0}{\abs{z-R_0}^2}e^{-i\phi} = \frac{1}{\bar{z} - R_0}e^{-i\phi} = \frac{1}{R-R_0e^{i\phi}}.\]
+Hence
+\[\begin{aligned}
+B_{n}(R) &= N\frac{\mu_0I}{4\pi^2}\oint_{|Z|=1}\frac{1}{(R-R_0Z)Z^{n+1}}dZ \\
+&= -N\frac{\mu_0I}{4\pi^2}\frac{1}{R_0}\oint_{|Z|=1}\frac{1}{(Z-R/R_0)Z^{n+1}}dZ
+\end{aligned}\]
+The $|Z|=1$ disk contains a pole of order $n$ at $Z=0$ if $n\ge 1$ and a pole of order 1 at
+$Z=R/R_0$ if $R< R_0$.
+
+For $n\le-1$ and $R< R_0$:
+\[\begin{aligned}
+B_{n}(R) &= -N\frac{\mu_0I}{4\pi^2}\frac{2\pi i}{R_0}\qty[Res(Z=R/R_0)] \\
+&= -iN\frac{\mu_0I}{2\pi}\frac{1}{R_0}\qty(\frac{R}{R_0})^{-n-1}\\
+&= -iN\frac{\mu_0I}{2\pi}\frac{1}{R}\qty(\frac{R}{R_0})^{-n}.
+\end{aligned}\]
+
+For $n\ge0$ and $R \le R_0$:
+\[\begin{aligned}
+B_{n}(R) &= -N\frac{\mu_0I}{4\pi^2}\frac{2\pi i}{R_0}\qty[Res(Z=R/R_0) + Res(Z=0)] \\
+&= -N\frac{\mu_0I}{4\pi^2}\frac{2\pi i}{R_0}\qty[\qty(\frac{R}{R_0})^{-n} - \qty(\frac{R}{R_0})^{-n} ] \\
+&= 0
+\end{aligned}\]
+
+For $n\le-1$ and $R> R_0$
+\[B_{n}(R) = 0.\]
+
+For $n\ge 0$ and $R> R_0$
+\[\begin{aligned}
+B_{n}(R) &= -N\frac{\mu_0I}{4\pi^2}\frac{2\pi i}{R_0}\qty[Res(Z=0)] \\
+&= iN\frac{\mu_0I}{2\pi}\frac{1}{R}\qty(\frac{R_0}{R})^n.
+\end{aligned}\]
+
+Hence,
+\[\boxed{B_{v,\Sigma,c,p} = i\frac{\mu_0NI}{2\pi R}\begin{cases}
+-\qty(R/R_0)^Ne^{-iN\phi} - \qty(R/R_0)^{2N}e^{-2iN\phi} - ... & \text{if } R<R_0\\
+1 + \qty(R_0/R)^Ne^{iN\phi} + \qty(R_0/R)^{2N}e^{2iN\phi} + ... & \text{if } R>R_0.\\
+\end{cases}}\]
+Note that $B_R$ and $B_\phi$ are given by the real and imaginary parts of the above expression. Hence
+\[\boxed{B_R = \frac{\mu_0NI}{2\pi R}\begin{cases}
+-\qty(R/R_0)^N\sin(N\phi) - \qty(R/R_0)^{2N}\sin(2N\phi) - ... & \text{if } R<R_0\\
+1 + \qty(R_0/R)^N\sin(N\phi) + \qty(R_0/R)^{2N}\sin(2N\phi) + ... & \text{if } R>R_0,\\
+\end{cases}}\]
+\[\boxed{B_\phi = \frac{\mu_0NI}{2\pi R}\begin{cases}
+-\qty(R/R_0)^N\cos(N\phi) - \qty(R/R_0)^{2N}\cos(2N\phi) - ... & \text{if } R<R_0\\
+1 + \qty(R_0/R)^N\cos(N\phi) + \qty(R_0/R)^{2N}\cos(2N\phi) + ... & \text{if } R>R_0.\\
+\end{cases}}\]
+
+
+\subsection{$B_{n}$ for case where $2RR_0/[(R^2+R_0^2+a^2)]\ll1$}
+
+Consider the function
+\[\begin{aligned}
+f_a(z) &= \frac{a}{\sqrt{\abs{z-R_0}^2+a^2}} \\
+&= \frac{a}{\sqrt{R^2+R_0^2 + 2RR_0\cos\phi+a^2}}.
+\end{aligned}\]
+By the AM-GM inequality
+\[\frac{2RR_0}{R^2+R_0^2}\le 1,\]
+with its maximum value at $R=R_0$.
+Let
+\[\epsilon=\frac{2RR_0}{(R^2+R_0^2+a^2)}\]
+We can approximate $f_a(z)$ with the following binomial expansion
+\[\begin{aligned}
+f_a(z) &= \frac{a}{\sqrt{R^2+R_0^2+a^2}\sqrt{1 + \epsilon\cos\phi}} \\
+&= \frac{a}{\sqrt{R^2+R_0^2+a^2}}\qty(1 - \frac{1}{2}\epsilon\cos\phi
++ O(\epsilon^2)).
+\end{aligned}\]
+Hence, using the equation at the end of Section \ref{sec:case_where_h_max_infinite} and 
+substituting $a\rightarrow h_{max} - h$ and $a\rightarrow h - h_{max}$ gives
+\[\boxed{B_R(R, \phi, h) = \frac{\mu_0NI}{4\pi R}\begin{cases}
+-\qty(\frac{R}{R_0})^N\qty(\frac{h_{max}-h}{\sqrt{R^2+R_0^2+(h_{max}-h)^2}}+\frac{h - h_{min}}{\sqrt{R^2+R_0^2+(h-h_{min})^2}}+ O(\epsilon))\sin(N\phi) +O(\frac{R}{R_0})^{2N} & \text{if } R<R_0\\
+1 + \qty(\frac{R}{R_0})^N\qty(\frac{h_{max}-h}{\sqrt{R^2+R_0^2+(h_{max}-h)^2}}+\frac{h - h_{min}}{\sqrt{R^2+R_0^2+(h-h_{min})^2}}+ O(\epsilon))\sin(N\phi) +O(\frac{R}{R_0})^{2N} & \text{if } R>R_0,\\
+\end{cases}}\]
+\[\boxed{B_Z(R, \phi, h) = \frac{\mu_0NI}{4\pi R}\begin{cases}
+1 + \qty(\frac{R}{R_0})^N\qty(\frac{h_{max}-h}{\sqrt{R^2+R_0^2+(h_{max}-h)^2}}+\frac{h - h_{min}}{\sqrt{R^2+R_0^2+(h-h_{min})^2}}+ O(\epsilon))\cos(N\phi) +O(\frac{R}{R_0})^{2N} & \text{if } R>R_0,\\
+\end{cases}}\]
+
+
+% \[
+% Res(Z=0) = \begin{cases}
+%     \frac{1}{R_0}\qty(\frac{R}{R_0})^n & \text{if n\ge 1}
+% \end{cases}\]
+
+% Let
+% \[I_n(R) = \int_0^{2\pi}\frac{z-R_0}{\abs{z-R_0}^2}\qty[\frac{h_{max}-h}{\sqrt{|z-R_0|^2+(h_{max}-h)^2}} + \frac{h-h_{min}}{\sqrt{|z-R_0|^2+(h-h_{min})^2}}]e^{-in\phi}d\phi.\]
+% Let
+% \[z' = e^{i\phi}.\]
+% \[\implies d\phi = \frac{dz'}{iz'}.\]
+% Note that
+% \[\frac{z-R_0}{\abs{z-R_0}^2} = \frac{1}{\bar{z} - R_0}=\frac{1}{R\exp(-i\phi) - R_0}= \frac{z'}{R-R_0z'},\]
+% \[\abs{z-R_0}^2 = R^2 + R_0^2 - R_0R(e^{i\phi} + e^{-i\phi})= R^2 + R_0^2 - R_0R(z' + 1/z').\]
+% Let
+% \[f(z') = \frac{a}{\sqrt{R^2+R_0^2 - R_0R(z'+1/z')}}\]
+% \[\frac{a}{\sqrt{R^2+R_0^2 - R_0R(z'+1/z')}}=\]
+% Hence,
+% \[I_n(R) = \frac{1}{i}\oint_{|z'|=1}\frac{(z')^{-n}}{R - R_0z'}\qty[\frac{h_{max}-h}{\sqrt{R^2+R_0^2-RR_0(z'+1/z')+(h_{max}-h)^2}} + \frac{h-h_{min}}{\sqrt{R^2+R_0^2-RR_0(z'+1/z')+(h-h_{min})^2}}]dz' \]
+% $$I=\oint_{|z=1|} \frac{z^{-n}}{R-R_0z}\frac{a}{\sqrt{R^2+R_0^2+a^2-RR_0(z+1/z)}}dz$$
+\end{document}
