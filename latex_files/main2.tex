@@ -1,0 +1,550 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\usepackage{amsmath}
+\usepackage{physics}
+\usepackage{dsfont}
+\usepackage{graphicx}
+\usepackage{hyperref}
+
+\let\vec\mathbf
+
+\geometry{margin = 2.5cm}
+
+\title{Analytical Approximations of Vacuum Magnetic Fields in Tokamaks}
+\author{Alexander Prokopyshyn}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Magnetic field produced by a vertical wire centred at the origin}
+\label{sec:vertical_wire_at_origin}
+
+The magnetic field produce by a vertical wire, centred at the origin, with current, \(I_0\) which points in the 
+\(\vec{\hat{z}}\) direction and extends from \(-z_{min}, z_{max}\) is given by the following Biot-Savart law expression:
+\[\begin{aligned}
+    \vec{B}_{v}(R, \phi, z) &= \frac{\mu_0 I_0}{4\pi}\int_{z_{min}}^{z_{max}}\frac{\vec{dh'}\cross(R\vec{\hat{R}} + (z-z')\vec{\hat{z}})}{\qty(R^2+(z-z')^2)^{3/2}} \\
+    &= \frac{\mu_0 I_0}{4\pi}\int_{z_{min}}^{z_{max}}\frac{Rdh'\vec{\hat{\phi}}}{\qty(R^2+(z-z')^2)^{3/2}}.
+\end{aligned}
+\]
+Let
+\[\cos\theta = \frac{R}{\sqrt{R^2+(z-z')^2}},\]
+\[\implies \sin\theta = \frac{z-z'}{\sqrt{R^2+(z-z')^2}},\]
+\[\implies \tan \theta = \frac{z-z'}{R},\]
+\[\implies z' = z - R\tan\theta,\]
+\[\implies dz' = -R\sec^2\theta d\theta.\]
+Hence
+\[
+\boxed{\begin{aligned}
+    \vec{B}_{v}(R, \phi, z) &= -\frac{\mu_0 I_0}{4\pi R}\int_{z_{min}}^{z_{max}}\cos\theta d\theta\vec{\hat{\phi}}\\
+    &= \frac{\mu_0 I_0}{4\pi R}\qty[-\sin\theta]_{z_{min}}^{z_{max}}\vec{\hat{\phi}}\\
+    &= \frac{\mu_0 I_0}{4\pi R}\qty[\frac{z_{max}-z}{\sqrt{R^2+(z_{max}-z)^2}} + \frac{z-z_{min}}{\sqrt{R^2+(z-z_{min})^2}}]\vec{\hat{\phi}}.
+\end{aligned}}\]
+
+\section{Vacuum Field from Vertical Wires in Picture-Frame TF Coils}
+
+Lets rewrite the above equation in cartesian coordinates:
+\[
+\begin{aligned}
+    \vec{B}_{v}(x, y, z) &= \frac{\mu_0 I_0}{4\pi}\qty[\frac{z_{max}-z}{\sqrt{x^2+y^2+(z_{max}-z)^2}} + \frac{z-z_{min}}{\sqrt{x^2+y^2+(z-z_{min})^2}}]\frac{-y\vec{\hat{x}}+x\vec{\hat{y}}}{x^2+y^2}.
+\end{aligned}\]
+Hence the magentic field given by the $k^{th}$ vertical wire in the picture-frame TF coils
+at $x=R_0\cos(\phi_k)$ and $y=R_0\sin(\phi_k)$ is given by
+\[
+\begin{aligned}
+    &\vec{B}_{v,k}(x-R_0\cos(\phi_k), y-R_0\sin(\phi_k), z) = \\
+    &\quad\frac{\mu_0 I_0}{4\pi}\left[\frac{z_{max}-z}{\sqrt{(x-R_0\cos\phi_k)^2+(y-R_0\sin\phi_k)^2+(z_{max}-z)^2}} + \right.\\
+    &\qquad\qquad\left.\frac{z-z_{min}}{\sqrt{(x-R_0\cos\phi_k)^2+(y-R_0\sin\phi_k)^2+(z-z_{min})^2}}\right]\times\\
+    &\qquad\qquad\qquad\frac{-(y-R_0\sin\phi_k)\vec{\hat{x}}+(x-R_0\cos\phi_k)\vec{\hat{y}}}{(x-R_0\cos\phi_k)^2+(y-R_0\sin\phi_k)^2},
+\end{aligned}
+\]
+where
+\[\phi_k = 2\pi\frac{k}{N},\]
+and $N$ is the number of TF coils.
+Taking the dot product of the above equation for the magneitc field with $\vec{\hat{R}}$ and $\vec{\hat{\phi}}$
+and writing in clyindrical coordinates, we get
+\[
+\begin{aligned}
+    &B_{R,v,k}(R, \phi, z) \\
+    &=\frac{\mu_0 I_0}{4\pi}\left[\frac{z_{max}-z}{\sqrt{(R\cos\phi-R_0\cos\phi_k)^2+(R\sin\phi-R_0\sin\phi_k)^2+(z_{max}-z)^2}} + \right.\\
+    &\qquad\qquad\left.\frac{z-z_{min}}{\sqrt{(R\cos\phi-R_0\cos\phi_k)^2+(R\sin\phi-R_0\sin\phi_k)^2+(z-z_{min})^2}}\right]\times\\
+    &\qquad\qquad\qquad\frac{-(R\sin\phi-R_0\sin\phi_k)\cos\phi+(R\cos\phi-R_0\cos\phi_k)\sin\phi}{(R\cos\phi-R_0\cos\phi_k)^2+(R\sin\phi-R_0\sin\phi_k)^2} \\
+    &=\frac{\mu_0 I_0}{4\pi}\left[\frac{z_{max}-z}{\sqrt{(R\cos\phi-R_0\cos\phi_k)^2+(R\sin\phi-R_0\sin\phi_k)^2+(z_{max}-z)^2}} + \right.\\
+    &\qquad\qquad\left.\frac{z-z_{min}}{\sqrt{(R\cos\phi-R_0\cos\phi_k)^2+(R\sin\phi-R_0\sin\phi_k)^2+(z-z_{min})^2}}\right]\times\\
+    &\qquad\qquad\qquad\frac{R_0\sin\phi_k\cos\phi-R_0\cos\phi_k\sin\phi}{(R\cos\phi-R_0\cos\phi_k)^2+(R\sin\phi-R_0\sin\phi_k)^2} \\
+\end{aligned}
+\]
+\[
+\begin{aligned}
+    &B_{\phi,v,k}(R, \phi, z) \\
+    &=\quad\frac{\mu_0 I_0}{4\pi}\left[\frac{z_{max}-z}{\sqrt{(R\cos\phi-R_0\cos\phi_k)^2+(R\sin\phi-R_0\sin\phi_k)^2+(z_{max}-z)^2}} + \right.\\
+    &\qquad\qquad\left.\frac{z-z_{min}}{\sqrt{(R\cos\phi-R_0\cos\phi_k)^2+(R\sin\phi-R_0\sin\phi_k)^2+(z-z_{min})^2}}\right]\times\\
+    &\qquad\qquad\qquad\frac{(R\sin\phi-R_0\sin\phi_k)\sin\phi+(R\cos\phi-R_0\cos\phi_k)\cos\phi}{(R\cos\phi-R_0\cos\phi_k)^2+(R\sin\phi-R_0\sin\phi_k)^2} \\
+    &=\frac{\mu_0 I_0}{4\pi}\left[\frac{z_{max}-z}{\sqrt{(R\cos\phi-R_0\cos\phi_k)^2+(R\sin\phi-R_0\sin\phi_k)^2+(z_{max}-z)^2}} + \right.\\
+    &\qquad\qquad\left.\frac{z-z_{min}}{\sqrt{(R\cos\phi-R_0\cos\phi_k)^2+(R\sin\phi-R_0\sin\phi_k)^2+(z-z_{min})^2}}\right]\times\\
+    &\qquad\qquad\qquad\frac{R-R_0\sin\phi_k\sin\phi-R_0\cos\phi_k\cos\phi}{(R\cos\phi-R_0\cos\phi_k)^2+(R\sin\phi-R_0\sin\phi_k)^2} \\
+\end{aligned}
+\]
+For $k=0$ we have
+\[
+\begin{aligned}
+    &B_{R,v,0}(R, \phi, z) \\
+   &=\frac{\mu_0 I_0}{4\pi}\left[\frac{z_{max}-z}{\sqrt{R^2+R_0^2-2R_0R\cos\phi+(z_{max}-z)^2}} + \right.\\
+    &\qquad\qquad\left.\frac{z-z_{min}}{\sqrt{R^2+R_0^2-2R_0R\cos\phi+(z-z_{min})^2}}\right]\times\\
+    &\qquad\qquad\qquad\frac{-R_0\sin\phi}{R^2+R_0^2-2R_0R\cos\phi} \\
+\end{aligned}
+\]
+\[
+\begin{aligned}
+    &B_{\phi,v,0}(R, \phi, z) \\
+   &=\frac{\mu_0 I_0}{4\pi}\left[\frac{z_{max}-z}{\sqrt{R^2+R_0^2-2R_0R\cos\phi+(z_{max}-z)^2}} + \right.\\
+    &\qquad\qquad\left.\frac{z-z_{min}}{\sqrt{R^2+R_0^2-2R_0R\cos\phi+(z-z_{min})^2}}\right]\times\\
+    &\qquad\qquad\qquad\frac{R-R_0\cos\phi}{R^2+R_0^2-2R_0R\cos\phi}. \\
+\end{aligned}
+\]
+Let
+\[\epsilon(R_0, z_0) = \frac{2RR_0\cos\phi}{R^2+R_0^2+(z-z_0)^2}.\]
+Note that $\abs{\epsilon(R_0, z_0)} \le 1$ by the AM-GM inequality.
+Hence,
+\[
+\begin{aligned}
+    &B_{R,v,0}(R, \phi, z) \\
+   &=\frac{\mu_0 I_0}{4\pi}\left[\frac{z_{max}-z}{\sqrt{R^2+R_0^2+(z_{max}-z)^2}}\qty{1+O[\epsilon(R_0, z_{max})]} + \right.\\
+    &\qquad\qquad\left.\frac{z-z_{min}}{\sqrt{R^2+R_0^2+(z-z_{min})^2}}\qty{1+O[\epsilon(R_0, z_{min})]}\right]\times\\
+    &\qquad\qquad\qquad\frac{-R_0\sin\phi}{R^2+R_0^2-2R_0R\cos\phi} \\
+\end{aligned}
+\]
+\[
+\begin{aligned}
+    &B_{\phi,v,0}(R, \phi, z) \\
+   &=\frac{\mu_0 I_0}{4\pi}\left[\frac{z_{max}-z}{\sqrt{R^2+R_0^2+(z_{max}-z)^2}}\qty{1+O[\epsilon(R_0, z_{max})]} + \right.\\
+    &\qquad\qquad\left.\frac{z-z_{min}}{\sqrt{R^2+R_0^2+(z-z_{min})^2}}\qty{1+O[\epsilon(R_0, z_{min})]}\right]\times\\
+    &\qquad\qquad\qquad\frac{R-R_0\cos\phi}{R^2+R_0^2-2R_0R\cos\phi}. \\
+\end{aligned}
+\]
+
+Hence, the magnetic field produced by all the vertical wires at $R=R_0$ is given by
+\[\vec{B}_{v,\Sigma}(R, \phi, z; R_0) = \sum_{k=0}^{N-1}\vec{B}_{v,k}(R, \phi, z).\]
+Hence,
+\[B_{R, v,\Sigma}(R, \phi, z; z_0) = \sum_{k=0}^{N-1}B_{R, v,k}(R, \phi, z),\]
+\[B_{\phi, v,\Sigma}(R, \phi, z; z_0) = \sum_{k=0}^{N-1}B_{\phi, v,k}(R, \phi, z).\]
+We now wish to express $\vec{B}_{v,\Sigma}$ as a fourier series in $\phi$.
+We will assume that $B_{R, v,\Sigma}$ is an odd function of $\phi$ and
+$B_{\phi, v,\Sigma}$ is an even function of $\phi$.
+Hence, we can write
+\[B_{R, v,\Sigma}(R, \phi, z) = \sum_{n=N}^{\infty}B_{R, v, n}(R, z)\sin(n\phi),\]
+\[B_{\phi, v,\Sigma}(R, \phi, z) = \sum_{n=0}^{\infty}B_{\phi, v, n}(R, z)\cos(n\phi),\]
+where $B_{R, v, n}(R, z)=B_{\phi, v, n}(R, z)=0$ for $n \bmod N \ne 0$.
+To be clear, $B_{R, v, n}(R, z)\ne B_{R, v, n}(R, \phi, z)$ and 
+$B_{\phi, v, n}(R, z)\ne B_{\phi, v, n}(R, \phi, z)$.
+From this point on we will assume $n \bmod N = 0$.
+
+Note that
+\[\begin{aligned}
+B_{R, v, n}(R, z)&=\frac{1}{\pi}\int_{0}^{2\pi}B_{R, v,\Sigma}(R, \phi, z)\sin(n\phi)d\phi \\
+&= \frac{N}{\pi}\int_0^{2\pi} B_{R, v, 0}(R, \phi, z)\sin(n\phi)d\phi,
+\end{aligned}\]
+for $n \bmod N = 0$.
+\[\begin{aligned}
+B_{\phi, v, 0}(R, z)&=\frac{1}{2\pi}\int_{0}^{2\pi}B_{\phi, v,\Sigma}(R, \phi, z)d\phi \\
+&= \frac{N}{2\pi}\int_0^{2\pi} B_{\phi, v, 0}(R, \phi, z)d\phi,
+\end{aligned}\]
+\[\begin{aligned}
+B_{\phi, v, n}(R, z)&=\frac{1}{\pi}\int_{0}^{2\pi}B_{\phi, v,\Sigma}(R, \phi, z)\cos(n\phi)d\phi \\
+&= \frac{N}{\pi}\int_0^{2\pi} B_{\phi, v, 0}(R, \phi, z)\cos(n\phi)d\phi,
+\end{aligned}\]
+for $n \bmod N = 0$ and $n\ne0$.
+
+\subsection{Fourier coefficients of the radial component of the magnetic field}
+
+Our goal in this section is to calculate this integral
+\[\begin{aligned}
+B_{R, v, n}(R, z)= \frac{N}{\pi}\int_0^{2\pi} B_{R, v, 0}(R, \phi, z)\sin(n\phi)d\phi.
+\end{aligned}\]
+Let
+\[a_v(R_0, z_0)=\frac{N}{\pi}\frac{\mu_0 I_0}{4\pi}\frac{z_0-z}{\sqrt{R^2+R_0^2+(z_0-z)^2}},\]
+\[I_{R,v,n}(R_0, z_0) = a_v(R_0, z_0)\int_0^{2\pi}\frac{R_0\sin\phi}{R^2+R_0^2-2R_0R\cos\phi}\sin(n\phi) d\phi.\]
+Note that,
+\[\begin{aligned}
+B_{R, v, n}(R, z)= I_{R,v,n}(R_0, z_{max})\qty{1+O[\epsilon(R_0, z_{max})]} - I_{R,v,n}(R_0, z_{min})\qty{1+O[\epsilon(R_0, z_{max})]}.
+\end{aligned}\]
+To calculate $I_{R,v,n}(R_0, z_0)$  we use a trick where we let $Z=e^{i\phi}$ and substitute
+\[\sin\phi = \frac{Z-Z^{-1}}{2i},\]
+\[\cos\phi = \frac{Z+Z^{-1}}{2},\]
+\[\sin(n\phi) = \frac{Z^n-Z^{-n}}{2i}.\]
+Then we take the integral over the unit circle $\abs{Z}=1$.
+Note that
+\[\frac{dZ}{d\phi} = iZ \implies d\phi = \frac{dZ}{iZ}.\]
+Hence,
+\[\begin{aligned}
+I_{R,v,n}(R_0, z_0) &= a_v\oint_{|Z|=1}\frac{1}{i}\frac{R_0(Z^2-1)}{2Z(R^2+R_0^2)-2R_0R(Z^2+1)}\frac{Z^n-Z^{-n}}{2i} \frac{dZ}{iZ} \\
+&= -\frac{a_v}{4i}\oint_{|Z|=1}\frac{R_0(Z^2-1)Z^{n-1}}{(RZ-R_0)(R-R_0Z)} - \frac{R_0(Z^2-1)Z^{-n-1}}{(RZ-R_0)(R-R_0Z)} dZ \\
+&= -\frac{a_v}{4i}\qty(I_1 - I_2).
+\end{aligned}\]
+We will assume $R\ne R_0$. The integrand of of both $I_1$ and $I_2$ have singularities at $Z=R/R_0$ and $Z=R_0/R$.
+The integrand of $I_2$ also has a singularity at $Z=0$.
+The residues at the simple poles are given by
+\[\text{Res}\qty(f, Z_0) = \lim_{Z\to Z_0} (Z-Z_0)f(Z).\]
+Note that
+\[\lim_{Z\to R/R_0}\frac{(Z-R/R_0)}{R-R_0Z} = -\frac{1}{R_0}\]
+\[\lim_{Z\to R_0/R}\frac{(Z-R_0/R)}{RZ-R_0} = \frac{1}{R}\]
+Now we will calculate the residues of the $I_1$ integrand:
+\[\begin{aligned}
+\text{Res}\qty(\frac{R_0(Z^2-1)Z^{n-1}}{(RZ-R_0)(R-R_0Z)}, R/R_0) &= -\frac{1}{R_0}\frac{R_0((R/R_0)^2-1)(R/R_0)^{n-1}}{R(R/R_0)-R_0} \\
+&= -\frac{1}{R_0}\frac{((R/R_0)^2-1)(R/R_0)^{n-1}}{(R/R_0)^2-1} \\
+&= -\frac{1}{R_0}(R/R_0)^{n-1} \\
+&= -\frac{1}{R} \qty(\frac{R}{R_0})^{n}.
+\end{aligned}\]
+\[\begin{aligned}
+\text{Res}\qty(\frac{R_0(Z^2-1)Z^{n-1}}{(RZ-R_0)(R-R_0Z)}, R_0/R) &= \frac{1}{R}\frac{R_0((R_0/R)^2-1)(R_0/R)^{n-1}}{R-R_0(R_0/R)} \\
+&= \frac{1}{R}\frac{(R_0/R)((R/R_0)^2-1)(R_0/R)^{n-1}}{1-(R_0/R)^2} \\
+&= -\frac{1}{R} \qty(\frac{R_0}{R})^{n}.
+\end{aligned}\]
+Now we will calculate the residues of the $I_2$ integrand:
+\[\begin{aligned}
+\text{Res}\qty(\frac{R_0(Z^2-1)Z^{-n-1}}{(RZ-R_0)(R-R_0Z)}, R/R_0) &= -\frac{1}{R_0}\frac{R_0((R/R_0)^2-1)(R/R_0)^{-n-1}}{R(R/R_0)-R_0} \\
+&= -\frac{1}{R_0}\frac{((R/R_0)^2-1)(R/R_0)^{-n-1}}{(R/R_0)^2-1} \\
+&= -\frac{1}{R_0}(R/R_0)^{-n-1} \\
+&= -\frac{1}{R} \qty(\frac{R_0}{R})^{n}.
+\end{aligned}\]
+\[\begin{aligned}
+\text{Res}\qty(\frac{R_0(Z^2-1)Z^{-n-1}}{(RZ-R_0)(R-R_0Z)}, R_0/R) &= \frac{1}{R}\frac{R_0((R_0/R)^2-1)(R_0/R)^{-n-1}}{R-R_0(R_0/R)} \\
+&= \frac{1}{R}\frac{R_0/R((R/R_0)^2-1)(R/R_0)^{-n-1}}{1-(R/R_0)^2} \\
+&= -\frac{1}{R} \qty(\frac{R}{R_0})^{n}.
+\end{aligned}\]
+Now, to calculate the residue at the order \( n+1 \) pole at \( Z=0 \), we use Wolfram Alpha. See the link 
+\href{https://www.wolframalpha.com/input?i=Residue%5Bpi%28Z%5E2-1%29Z%5E%28-16-1%29%2F%28%28exp%281%29Z-pi%29*%28exp%281%29-piZ%29%29%2C+%7BZ%2C+0%7D%5D}{here}.
+To get
+\[\begin{aligned}
+\text{Res}\qty(\frac{R_0(Z^2-1)Z^{-n-1}}{(RZ-R_0)(R-R_0Z)}, 0) &= \frac{1}{R}\qty(\frac{R}{R_0})^n + \frac{1}{R}\qty(\frac{R_0}{R})^n \\
+\end{aligned}\]
+
+Hence, by the residue theorem,
+\[\boxed{I_{R,v,n}(R_0, z_0) = \pi a_v(R_0, z_0) \frac{1}{R}\qty(\frac{R}{R_0})^n}\]
+for $R<R_0$, $n \bmod{N} = 0$
+and
+\[\boxed{I_{R,v,n}(R_0, z_0) = \pi a_v(R_0, z_0) \frac{1}{R}\qty(\frac{R_0}{R})^n}\]
+for $R>R_0$, $n \bmod{N} = 0$.
+\[\begin{aligned}
+B_{R, v, n}(R, z)= I_{R,v,n}(R_0, z_{max})\qty{1+O[\epsilon(R_0, z_{max})]} - I_{R,v,n}(R_0, z_{min})\qty{1+O[\epsilon(R_0, z_{max})]}.
+\end{aligned}\]
+\[a_v(R_0, z_0)=\frac{N}{\pi}\frac{\mu_0 I_0}{4\pi}\frac{z_0-z}{\sqrt{R^2+R_0^2+(z_0-z)^2}},\]
+Hence the radial magnetic field from the all the veritical fields at $R=R_0$ is given by
+\[\boxed{
+\begin{aligned}
+B_{R,v}(R, \phi, z)=&\frac{\mu_0 I_0}{4\pi}\left(\frac{z_{max}-z}{\sqrt{R^2+R_0^2+(z_{max}-z)^2}}+O[\epsilon(R_0, z_{max})]\right. \\
+& \qquad\qquad\left.+\frac{z-z_{min}}{\sqrt{R^2+R_0^2+(z_{min}-z)^2}}+O[\epsilon(R_0, z_{min})]\right) \\
+& \sum_{n=N}^\infty \frac{1}{R}\qty(\frac{R}{R_0})^n\sin(n\phi),
+\end{aligned}}
+\]
+for $R<R_0$, $n \bmod{N} = 0$ and
+\[\boxed{
+\begin{aligned}
+B_{R,v}(R, \phi, z)=&\frac{\mu_0 I_0}{4\pi}\left(\frac{z_{max}-z}{\sqrt{R^2+R_0^2+(z_{max}-z)^2}}+O[\epsilon(R_0, z_{max})]\right. \\
+& \qquad\qquad\left.+\frac{z-z_{min}}{\sqrt{R^2+R_0^2+(z_{min}-z)^2}}+O[\epsilon(R_0, z_{min})]\right) \\
+& \sum_{n=N}^\infty \frac{1}{R}\qty(\frac{R}{R_0})^n\sin(n\phi),
+\end{aligned}}
+\]
+for $R>R_0$, $n \bmod{N} = 0$
+
+
+\section{Vacuum Field from Horizontal Wires in Picture-Frame TF Coils}
+
+To calculate the magnetic field induced by a horizontal wire which points in the $\mathbf{\hat{R}}_k=\cos(\phi_k)\mathbf{\hat{x}} + \sin(\phi_k)\mathbf{\hat{y}}$
+direction and extends from $R_{inner}$ to $R_{outer}$ at $h=h_0$ we rotate our expression
+from the end of Section \ref{sec:vertical_wire_at_origin}.
+
+For reference, the rotation matrix to rotate a vector an angle $\theta$ about the
+$y$-axis is given by
+\[\text{R}_y(\theta) = \begin{pmatrix}
+    \cos(\theta) & 0 & \sin(\theta) \\
+    0 & 1 & 0 \\
+    -\sin(\theta) & 0 & \cos(\theta)
+\end{pmatrix},\]
+and about the $z$-axis is given by
+\[\text{R}_z(\theta) = \begin{pmatrix}
+    \cos(\theta) & -\sin(\theta) & 0 \\
+    \sin(\theta) & \cos(\theta) & 0 \\
+    0 & 0 & 1
+\end{pmatrix}.\]
+
+Our full rotation matrix is given by
+\[\begin{aligned}
+    \text{R}_k&=\text{R}_z(\phi_k)\text{R}_y(\pi/2) \\
+    &=\begin{pmatrix}
+        \cos(\phi_k) & -\sin(\phi_k) & 0 \\
+        \sin(\phi_k) & \cos(\phi_k) & 0 \\
+        0 & 0 & 1
+    \end{pmatrix}
+    \begin{pmatrix}
+        0 & 0 & 1 \\
+        0 & 1 & 0 \\
+        -1 & 0 & 0
+    \end{pmatrix} \\
+    &= \begin{pmatrix}
+        0 & -\sin(\phi_k) & \cos(\phi_k) \\
+        0 & \cos(\phi_k) & \sin(\phi_k) \\
+        -1 & 0 & 0
+    \end{pmatrix}.
+\end{aligned} \]
+The inverse rotation matrix is given by
+\[\begin{aligned}
+    \text{R}^{-1}_k &= \text{R}_y(-\pi/2)\text{R}_z(-\phi_k) \\
+    &= \begin{pmatrix}
+        0 & 0 & -1 \\
+        0 & 1 & 0 \\
+        1 & 0 & 0
+    \end{pmatrix}
+    \begin{pmatrix}
+        \cos(\phi_k) & \sin(\phi_k) & 0 \\
+        -\sin(\phi_k) & \cos(\phi_k) & 0 \\
+        0 & 0 & 1
+    \end{pmatrix} \\
+    &= \begin{pmatrix}
+        0 & 0 & -1 \\
+        -\sin(\phi_k) & \cos(\phi_k) & 0 \\
+        \cos(\phi_k) & \sin(\phi_k) & 1
+    \end{pmatrix}.
+\end{aligned}\]
+Note that
+\[\begin{aligned}
+    \vec{B}_{v}(R, \phi, z; z_{min}, z_{max}) &= \frac{\mu_0 I_0}{4\pi R}\qty[\frac{z_{max}-z}{\sqrt{R^2+(z_{max}-z)^2}} + \frac{z-z_{min}}{\sqrt{R^2+(z-z_{min})^2}}]
+    \begin{pmatrix}
+        -\sin(\phi) \\
+        \cos(\phi) \\
+        0
+    \end{pmatrix}.
+\end{aligned}\]
+\[\begin{aligned}
+    \implies \vec{B}_{v}(x, y, z; z_{min}, z_{max}) &= \frac{\mu_0 I_0}{4\pi}\frac{1}{x^2+y^2}\qty[\frac{z_{max}-z}{\sqrt{x^2+y^2+(z_{max}-z)^2}} + \frac{z-z_{min}}{\sqrt{x^2+y^2+(z-z_{min})^2}}]
+    \begin{pmatrix}
+        -y \\
+        x \\
+        0
+    \end{pmatrix}.
+\end{aligned}\]
+Let 
+
+\[\begin{aligned}
+    \begin{pmatrix}
+        x_k \\ y_k \\ z_k
+    \end{pmatrix} &= \text{R}^{-1}_k
+    \begin{pmatrix}
+        x \\ y \\ z
+    \end{pmatrix} \\
+    &= \begin{pmatrix}
+        -z \\
+        y \cos(\phi_k) - x \sin(\phi_k) \\
+        x \cos(\phi_k) + y \sin(\phi_k)
+    \end{pmatrix}.
+\end{aligned}\]
+Hence
+
+\[\begin{aligned}
+\implies
+\begin{pmatrix}
+    x \\ y \\ z
+\end{pmatrix} &= 
+\text{R}_k
+\begin{pmatrix}
+    x_k \\ y_k \\ z_k
+\end{pmatrix} \\
+&= \begin{pmatrix}
+    z_k\cos(\phi_k)-y_k\sin(\phi_k)  \\
+    y_k\cos(\phi_k) +z_k\sin(\phi_k) \\
+    -x_k
+\end{pmatrix}.
+\end{aligned}\]
+The magnetic field generated by the $k$th horizontal wire at $z=z_0$ is given
+\[\begin{aligned}
+    \vec{B}_{h,k}(x, y, z) &= \text{R}_k\mathbf{B}_{v}(x_k + z_0, y_k, z_k; R_{inner}, R_{outer}) \\
+    &= \frac{\mu_0 I_0}{4\pi}\frac{1}{(x_k+z_0)^2+y_k^2}\left[\frac{R_{outer}-z_k}{\sqrt{(x_k+z_0)^2+y_k^2+(R_{outer}-z_k)^2}}\right. \\
+     &\qquad\qquad\qquad\qquad\qquad+\left.\frac{z_k-R_{inner}}{\sqrt{(x_k+z_0)^2+y_k^2+(z_k-R_{inner})^2}}\right]
+    R_k\begin{pmatrix}
+        -y_k \\
+        x_k+z_0 \\
+        0
+    \end{pmatrix}\\
+    &= \frac{\mu_0 I_0}{4\pi}\frac{1}{y_k^2+(z-z_0)^2}\left[\frac{R_{outer}-z_k}{\sqrt{(R_{outer}-z_k)^2+y_k^2+(z-z_0)^2}}\right. \\
+     &\qquad\qquad\qquad\qquad\qquad+\left.\frac{z_k-R_{inner}}{\sqrt{(z_k-R_{inner})^2+y_k^2+(z-z_0)^2}}\right]
+    \begin{pmatrix}
+        -(x_k+z_0)\sin(\phi_k) \\
+        (x_k+z_0)\cos(\phi_k) \\
+        y_k
+    \end{pmatrix}. \\
+\end{aligned}\]
+For $k=0$, we have
+\[\begin{aligned}
+    \vec{B}_{h,0}(x, y, z) &= \frac{\mu_0 I_0}{4\pi}\frac{1}{y^2+(z_0-z)^2}\left[\frac{R_{outer}-x}{\sqrt{(R_{outer}-x)^2+y^2+(z-z_0)^2}}\right. \\
+    &\qquad\qquad\qquad\qquad\qquad+\left.\frac{x-R_{inner}}{\sqrt{(x-R_{inner})^2+y^2+(z-z_0)^2}}\right]
+   \begin{pmatrix}
+       0 \\
+       z_0-z \\
+       y
+    \end{pmatrix}. \\
+\end{aligned}\]
+In cylindrical coordinates and taking the dot product with $\vec{\hat{R}}$, $\vec{\hat{\phi}}$ and $\vec{\hat{z}}$ we get
+\[\begin{aligned}
+    B_{R,h,0}(R, \phi, z) &= \frac{\mu_0 I_0}{4\pi}\frac{\sin\phi(z_0-z)}{R^2\sin^2\phi+(z_0-z)^2}\left[\frac{R_{outer}-R\cos(\phi)}{\sqrt{R^2+R_{outer}^2-2RR_{outer}\cos\phi+(z-z_0)^2}}\right. \\
+    &\qquad\qquad\qquad\qquad\qquad\qquad+\left.\frac{R\cos(\phi)-R_{inner}}{\sqrt{R^2+R_{inner}^2-2RR_{inner}\cos\phi+(z-z_0)^2}}\right]
+\end{aligned}\]
+\[\begin{aligned}
+    B_{\phi,h,0}(R, \phi, z) &= \frac{\mu_0 I_0}{4\pi}\frac{\cos\phi(z_0-z)}{R^2\sin^2\phi+(z_0-z)^2}\left[\frac{R_{outer}-R\cos(\phi)}{\sqrt{R^2+R_{outer}^2-2RR_{outer}\cos\phi+(z-z_0)^2}}\right. \\
+    &\qquad\qquad\qquad\qquad\qquad\qquad+\left.\frac{R\cos(\phi)-R_{inner}}{\sqrt{R^2+R_{inner}^2-2RR_{inner}\cos\phi+(z-z_0)^2}}\right]
+\end{aligned}\]
+\[\begin{aligned}
+    B_{z,h,0}(R, \phi, z) &= \frac{\mu_0 I_0}{4\pi}\frac{R\sin\phi}{R^2\sin^2\phi+(z_0-z)^2}\left[\frac{R_{outer}-R\cos(\phi)}{\sqrt{R^2+R_{outer}^2-2RR_{outer}\cos\phi+(z-z_0)^2}}\right. \\
+    &\qquad\qquad\qquad\qquad\qquad\qquad+\left.\frac{R\cos(\phi)-R_{inner}}{\sqrt{R^2+R_{inner}^2-2RR_{inner}\cos\phi+(z-z_0)^2}}\right].
+\end{aligned}\]
+Using the expression for $\epsilon(R_0, z_0)$ introduced in the previous section, namely,
+\[\epsilon(R_0, z_0) = \frac{2RR_0\cos\phi}{R^2+R_0^2+(z-z_0)^2},\]
+we can simplify the above to give
+\[\begin{aligned}
+    B_{R,h,0}(R, \phi, z) &= \frac{\mu_0 I_0}{4\pi}\frac{\sin\phi(z_0-z)}{R^2\sin^2\phi+(z_0-z)^2}\left[\frac{R_{outer}-R\cos(\phi)}{\sqrt{R^2+R_{outer}^2+(z-z_0)^2}}\qty{1+O[\epsilon(R_{outer}, z_0)]}\right. \\
+    &\qquad\qquad\qquad\qquad\qquad\qquad+\left.\frac{R\cos(\phi)-R_{inner}}{\sqrt{R^2+R_{inner}^2+(z-z_0)^2}}\qty{1+O[\epsilon(R_0, z_{max})]}\right]
+\end{aligned}\]
+\[\begin{aligned}
+    B_{\phi,h,0}(R, \phi, z) &= \frac{\mu_0 I_0}{4\pi}\frac{\cos\phi(z_0-z)}{R^2\sin^2\phi+(z_0-z)^2}\left[\frac{R_{outer}-R\cos(\phi)}{\sqrt{R^2+R_{outer}^2+(z-z_0)^2}}\qty{1+O[\epsilon(R_{outer}, z_0)]}\right. \\
+    &\qquad\qquad\qquad\qquad\qquad\qquad+\left.\frac{R\cos(\phi)-R_{inner}}{\sqrt{R^2+R_{inner}^2+(z-z_0)^2}}\qty{1+O[\epsilon(R_{inner}, z_0)]}\right]
+\end{aligned}\]
+
+The magnetic field produced by all the horizontal wires at $z=z_0$ is given by
+\[\vec{B}_{h,\Sigma}(R, \phi, z; z_0) = \sum_{k=0}^{N-1}\vec{B}_{h,k}(R, \phi, z).\]
+Hence,
+\[B_{R, h,\Sigma}(R, \phi, z; z_0) = \sum_{k=0}^{N-1}B_{R, h,k}(R, \phi, z),\]
+\[B_{\phi, h,\Sigma}(R, \phi, z; z_0) = \sum_{k=0}^{N-1}B_{\phi, h,k}(R, \phi, z),\]
+\[B_{z, h,\Sigma}(R, \phi, z; z_0) = \sum_{k=0}^{N-1}B_{z, h,k}(R, \phi, z).\]
+We now wish to express $\vec{B}_{h,\Sigma}$ as a fourier series in $\phi$.
+We will assume that $B_{R, h,\Sigma}$, $B_{z, h,\Sigma}$ are odd functions of $\phi$ and
+$B_{\phi, h,\Sigma}$ is an even function of $\phi$.
+Hence, we can write
+\[B_{R, h,\Sigma}(R, \phi, z) = \sum_{n=N}^{\infty}B_{R, h, n}(R, z)\sin(n\phi),\]
+\[B_{\phi, h,\Sigma}(R, \phi, z) = \sum_{n=0}^{\infty}B_{\phi, h, n}(R, z)\cos(n\phi),\]
+\[B_{z, h,\Sigma}(R, \phi, z) = \sum_{n=N}^{\infty}B_{z, h, n}(R, z)\sin(n\phi),\]
+where $B_{R, h, n}(R, z)=B_{\phi, h, n}(R, z)=B_{z, h, n}(R, z)=0$ for $n \bmod N \ne 0$.
+To be clear, $B_{R, h, n}(R, z)\ne B_{R, h, n}(R, \phi, z)$, $B_{\phi, h, n}(R, z)\ne B_{\phi, h, n}(R, \phi, z)$,
+$B_{z, h, n}(R, z)\ne B_{z, h, n}(R, \phi, z)$. From this point on we will assume $n \bmod N = 0$.
+
+Note that
+\[\begin{aligned}
+B_{R, h, n}(R, z)&=\frac{1}{\pi}\int_{0}^{2\pi}B_{R, h,\Sigma}(R, \phi, z)\sin(n\phi)d\phi \\
+&= \frac{N}{\pi}\int_0^{2\pi} B_{R, h, 0}(R, \phi, z)\sin(n\phi)d\phi,
+\end{aligned}\]
+for $n \bmod N = 0$.
+\[\begin{aligned}
+B_{\phi, h, 0}(R, z)&=\frac{1}{2\pi}\int_{0}^{2\pi}B_{\phi, h,\Sigma}(R, \phi, z)d\phi \\
+&= \frac{N}{2\pi}\int_0^{2\pi} B_{\phi, h, 0}(R, \phi, z)d\phi,
+\end{aligned}\]
+\[\begin{aligned}
+B_{\phi, h, n}(R, z)&=\frac{1}{\pi}\int_{0}^{2\pi}B_{\phi, h,\Sigma}(R, \phi, z)\cos(n\phi)d\phi \\
+&= \frac{N}{\pi}\int_0^{2\pi} B_{\phi, h, 0}(R, \phi, z)\cos(n\phi)d\phi,
+\end{aligned}\]
+for $n \bmod N = 0$ and $n\ne0$.
+\[\begin{aligned}
+B_{z, h, n}(R, z)&=\frac{1}{\pi}\int_{0}^{2\pi}B_{z, h,\Sigma}(R, \phi, z)\sin(n\phi)d\phi \\
+&= \frac{N}{\pi}\int_0^{2\pi} B_{z, h, 0}(R, \phi, z)\sin(n\phi)d\phi,
+\end{aligned}\]
+for $n \bmod N = 0$.
+
+\subsection{Fourier coefficients of the radial component of the magnetic field}
+
+Our goal in this section is to calculate this integral
+\[\begin{aligned}
+B_{R, h, n}(R, z)= \frac{N}{\pi}\int_0^{2\pi} B_{R, h, 0}(R, \phi, z)\sin(n\phi)d\phi.
+\end{aligned}\]
+Let
+\[a_h(R_0, z_0)=\frac{N}{\pi}\frac{\mu_0 I_0}{4\pi}\frac{1}{\sqrt{R^2+R_0^2+(z_0-z)^2}},\]
+\[I_{R,h,n}(R_0, z_0) = a_h(R_0, z_0)\int_0^{2\pi}\frac{\sin\phi(z_0-z)(R_0-R\cos\phi)}{R^2\sin^2\phi+(z_0-z)^2}\sin(n\phi) d\phi.\]
+Note that if $n$w is even we can simplify this integral to give
+\[I_{R,h,n}(R_0, z_0) = a_h(R_0, z_0)\int_0^{2\pi}\frac{\sin\phi(z_0-z)(R_0-R\cos\phi)}{R^2\sin^2\phi+(z_0-z)^2}\sin(n\phi) d\phi.\]
+Note that, for $n$ even
+\[\begin{aligned}
+I_{R,h,n}(R_0, z_0) &= -a_h(R_0, z_0)\int_0^{2\pi}\frac{\sin\phi(z_0-z)R\cos\phi}{R^2\sin^2\phi+(z_0-z)^2}\sin(n\phi) d\phi \\
+&= -\frac{1}{2}a_h(R_0, z_0)\int_0^{2\pi}\frac{R(z_0-z)\sin2\phi}{R^2\sin^2\phi+(z_0-z)^2}\sin(n\phi) d\phi \\
+&= -\frac{1}{2}a_h(R_0, z_0)\int_0^{2\pi}\frac{R(z_0-z)\sin2\phi}{R^2+(z_0-z)^2-R^2\cos^2\phi}\sin(n\phi) d\phi \\
+&= -\frac{1}{2}a_h(R_0, z_0)\frac{R(z_0-z)}{R^2+(z_0-z)^2}\int_0^{2\pi}\frac{\sin2\phi}{1-\delta^2(R_0, z_0)\cos^2\phi}\sin(n\phi) d\phi,
+\end{aligned}\]
+where
+\[\delta^2(R_0,z0) = \frac{R^2}{R^2 + (z_0-z)^2}.\]
+For proof see this Wolfram alpha
+\href{https://www.wolframalpha.com/input?i=residues+of+%28%28z-1%2Fz%29%2F%282i%29%29*gamma*%28pi%29+*+%28z%5E6-1%2Fz%5E6%29%2F%282i%29+%2F+%28exp%282%29*%28%28z-1%2Fz%29%2F%282i%29%29%5E2%2Bgamma*gamma%29+*+%281%2F%28I*z%29%29}{link.}
+
+\[\begin{aligned}
+B_{R, h, n}(R, z)= I_{R,h,n}(R_{max}, z_0)\qty{1+O[\epsilon(R_0, z_{max})]} - I_{R,h,n}(R_{min}, z_0)\qty{1+O[\epsilon(R_0, z_{max})]}.
+\end{aligned}\]
+To calculate $I_{R,v,n}(R_0, z_0)$  we use a trick where we let $Z=e^{i\phi}$ and substitute
+\[\sin(n\phi) = \frac{Z^n-Z^{-n}}{2i}.\]
+Then we take the integral over the unit circle $\abs{Z}=1$.
+Note that
+\[\frac{dZ}{d\phi} = iZ \implies d\phi = \frac{dZ}{iZ}.\]
+Hence,
+\[\begin{aligned}
+I_{R,h,n}(R_0, z_0) &= -\frac{1}{2}a_h(R_0, z_0)\frac{R(z_0-z)}{R^2+(z_0-z)^2}\int_0^{2\pi}\frac{\qty(\frac{Z^2-Z^{-2}}{2i})}{1-\delta^2(R_0, z_0)\qty(\frac{Z+Z^{-1}}{2})^2}\qty(\frac{Z^n-Z^{-n}}{2i}) \frac{dZ}{iZ}.
+\end{aligned}\]
+For $n$ even this is given by
+\[\begin{aligned}
+I_{R,h,n}(R_0, z_0) &= -\frac{1}{2}a_h(R_0, z_0)\frac{R(z_0-z)}{R^2+(z_0-z)^2}2\pi i \qty[\frac{i}{2}\qty(\frac{\delta}{2})^{n-2} + O(\delta^n)] \\
+&= \frac{\pi}{2}a_h(R_0, z_0)\frac{z_0-z}{R} \qty[4\qty(\frac{\delta}{2})^n + O(\delta^{n+2})] \\
+&= 2\pi a_h(R_0, z_0)\frac{z_0-z}{R} \qty[\qty(\frac{\delta}{2})^n + O(\delta^{n+2})] \\
+&= N\frac{\mu_0 I_0}{2\pi}\frac{1}{\sqrt{R^2+R_0^2+(z_0-z)^2}}\frac{z_0-z}{R} \qty[\qty(\frac{\delta}{2})^n + O(\delta^{n+2})]
+\end{aligned}\]
+For proof see case where $n=6$:
+\href{https://www.wolframalpha.com/input?i=residues+of+%28%28z%5E2-1%2Fz%5E2%29%2F%282i%29%29+*+%28z%5E6-1%2Fz%5E6%29%2F%282i%29+%2F+%281-%28%28z%2B1%2Fz%29%2F%282%29%29%5E2*gamma%5E2%29+*+%281%2F%28I*z%29%29}{link1},
+\href{https://www.wolframalpha.com/input?i=Residue%5B%28I%2F4+%28-z%5E%28-2%29+%2B+z%5E2%29+%28-z%5E%28-6%29+%2B+z%5E6%29%29%2F%28z+%281+-+%28EulerGamma%5E2+%28z%5E%28-1%29+%2B+z%29%5E2%29%2F4%29%29%2C+%7Bz%2C+0%7D%5D}{link2}, 
+\href{https://www.wolframalpha.com/input?i=Residue%5B%28I%2F4+%28-z%5E%28-2%29+%2B+z%5E2%29+%28-z%5E%28-6%29+%2B+z%5E6%29%29%2F%28z+%281+-+%28EulerGamma%5E2+%28z%5E%28-1%29+%2B+z%29%5E2%29%2F4%29%29%2C+%7Bz%2C+%282+-+Sqrt%5B4+-+4+EulerGamma%5E2%5D%29%2F%282+EulerGamma%29%7D%5D}{link3}, 
+\href{https://www.wolframalpha.com/input?i=series+%282+i+sqrt%281+-+x+%5E2%29+%2816+-+16+x+%5E2+%2B+3+x+%5E4%29+%288+%2B+x+%5E4+-+8+sqrt%281+-+x+%5E2%29+%2B+4+x+%5E2+%28sqrt%281+-+x+%5E2%29+-+2%29%29%5E2%29%2F%28+x+%5E8+%28sqrt%281+-+x+%5E2%29+-+1%29%5E8%29}{link4}.
+
+Hence, the radial component of the magnetic field induced by the horizontal wires at $z=z_0$
+is given by
+\[
+\boxed{
+\begin{aligned}
+B_{R,h,n}(R, \phi, z) &= N\frac{\mu_0I_0}{2\pi}\frac{z_0-z}{R}\left\{\frac{1}{\sqrt{R^2+R_{max}^2+(z_0-z)^2}}\right. + O[\epsilon(R_{max}, z_0)] \\
+&\qquad\qquad\qquad\qquad\left.-\frac{1}{\sqrt{R^2+R_{min}^2+(z_0-z)^2}} + O[\epsilon(R_{min}, z_0)]\right\}\times \\
+&\qquad\sum_{n=N}^{\infty}\qty{\qty(\frac{R}{2\sqrt{R+(z_0-z)^2}})^{n}+O\qty[\qty(\frac{R}{2\sqrt{R^2+(z_0-z)^2}})^{n+1}]}\sin(n\phi)
+\end{aligned}
+}
+\]
+
+\subsection{Fourier coefficients of the toroidal component of the magnetic field}
+
+Our goal in this section is to calculate these integrals
+\[\begin{aligned}
+B_{\phi, h, 0}(R, z)= \frac{N}{2\pi}\int_0^{2\pi} B_{\phi, h, 0}(R, \phi, z)d\phi,
+\end{aligned}\]
+and
+\[\begin{aligned}
+B_{\phi, h, n}(R, z)= \frac{N}{\pi}\int_0^{2\pi} B_{\phi, h, 0}(R, \phi, z)\cos(n\phi)d\phi,
+\end{aligned}\]
+for $n \bmod N = 0$ and $n\ne0$.
+Let
+\[a_h(R_0, z_0)=\frac{N}{\pi}\frac{\mu_0 I_0}{4\pi}\frac{1}{\sqrt{R^2+R_0^2+(z_0-z)^2}},\]
+\[I_{\phi,h,0}(R_0, z_0) = \frac{a_h(R_0, z_0)}{2}\int_0^{2\pi}\frac{\cos\phi(z_0-z)(R_0-R\cos\phi)}{R^2\sin^2\phi+(z_0-z)^2} d\phi.\]
+\[I_{\phi,h,n}(R_0, z_0) = a_h(R_0, z_0)\int_0^{2\pi}\frac{\cos\phi(z_0-z)(R_0-R\cos\phi)}{R^2\sin^2\phi+(z_0-z)^2}\cos(n\phi) d\phi,\]
+for $n\ne 0$.
+Note that,
+\[\begin{aligned}
+B_{\phi, v, n}(R, z)= I_{\phi,h,n}(R_{outer}, z_0)\qty{1+O[\epsilon(R_{outer}, z_0)]} - I_{\phi,h,n}(R_{inner}, z_0)\qty{1+O[\epsilon(R_{inner}, z_{max})]}.
+\end{aligned}\]
+To calculate $I_{\phi,v,n}(R_0, z_0)$  we use a trick where we let $Z=e^{i\phi}$ and substitute
+\[\sin\phi = \frac{Z-Z^{-1}}{2i},\]
+\[\cos\phi = \frac{Z+Z^{-1}}{2},\]
+\[\cos(n\phi) = \frac{Z^n+Z^{-n}}{2}.\]
+Then we take the integral over the unit circle $\abs{Z}=1$.
+Note that
+\[\frac{dZ}{d\phi} = iZ \implies d\phi = \frac{dZ}{iZ}.\]
+Hence,
+\[\begin{aligned}
+I_{R,v,0}(R_0, z_0) &= \frac{a_h}{2}\int_0^{2\pi}\frac{\qty(\frac{Z+Z^{-1}}{2})(z_0-z)(R_0-R\qty(\frac{Z+Z^{-1}}{2}))}{R^2\qty(\frac{Z-Z^{-1}}{2i})^2+(z_0-z)^2} \frac{dZ}{iZ} \\
+&= \frac{a_h}{2i}\int_0^{2\pi}\frac{(Z^2+1)(z_0-z)[2R_0Z-R(Z^2+1)]}{4Z^2(z_0-z)^2-R^2(Z^2-1)^2} \frac{dZ}{Z}\\
+\end{aligned}\]
+The integrand of $I_{R,v,0}(R_0, z_0)$ has simple poles at
+\[Z=\pm\sqrt{\frac{R+(z_0-z)}{R}},\]
+however, these lie outside the unit circle and so we can ignore them.
+The integrand of $I_{R,v,0}(R_0, z_0)$ also has simple poles at $Z=0$ and
+\[Z=\pm\sqrt{\frac{R-(z_0-z)}{R}},\]
+
+\end{document}
+ d s
