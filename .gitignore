@@ -166,4 +166,9 @@ main.fdb_latexmk
 main.fls
 main.log
 main.synctex.gz
+main2.aux
+main2.fdb_latexmk
+main2.fls
+main2.log
+main2.synctex.gz
 
