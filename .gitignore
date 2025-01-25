@@ -172,4 +172,10 @@ main2.fls
 main2.log
 main2.synctex.gz
 main2.out
-
+wide_tokamak.aux
+wide_tokamak.fdb_latexmk
+wide_tokamak.fls
+wide_tokamak.log
+wide_tokamak.synctex.gz
+wide_tokamak.out
+wide_tokamak.synctex.gz
