@@ -485,10 +485,10 @@ I_{R,h,n}(R_0, z_0) &= -\frac{1}{2}a_h(R_0, z_0)\frac{R(z_0-z)}{R^2+(z_0-z)^2}\i
 \end{aligned}\]
 For $n$ even this is given by
 \[\begin{aligned}
-I_{R,h,n}(R_0, z_0) &= -\frac{1}{2}a_h(R_0, z_0)\frac{R(z_0-z)}{R^2+(z_0-z)^2}2\pi i \qty[\frac{i}{2}\qty(\frac{\delta}{2})^{n-2} + O(\delta^n)] \\
-&= \frac{\pi}{2}a_h(R_0, z_0)\frac{z_0-z}{R} \qty[4\qty(\frac{\delta}{2})^n + O(\delta^{n+2})] \\
-&= 2\pi a_h(R_0, z_0)\frac{z_0-z}{R} \qty[\qty(\frac{\delta}{2})^n + O(\delta^{n+2})] \\
-&= N\frac{\mu_0 I_0}{2\pi}\frac{1}{\sqrt{R^2+R_0^2+(z_0-z)^2}}\frac{z_0-z}{R} \qty[\qty(\frac{\delta}{2})^n + O(\delta^{n+2})]
+I_{R,h,n}(R_0, z_0) &= -\frac{1}{2}a_h(R_0, z_0)\frac{R(z_0-z)}{R^2+(z_0-z)^2}2\pi i \qty[-\frac{i}{2}\qty(\frac{\delta}{2})^{n-2} + O(\delta^n)] \\
+&= -\frac{\pi}{2}a_h(R_0, z_0)\frac{z_0-z}{R} \qty[4\qty(\frac{\delta}{2})^n + O(\delta^{n+2})] \\
+&= -2\pi a_h(R_0, z_0)\frac{z_0-z}{R} \qty[\qty(\frac{\delta}{2})^n + O(\delta^{n+2})] \\
+&= -N\frac{\mu_0 I_0}{2\pi}\frac{1}{\sqrt{R^2+R_0^2+(z_0-z)^2}}\frac{z_0-z}{R} \qty[\qty(\frac{\delta}{2})^n + O(\delta^{n+2})]
 \end{aligned}\]
 For proof see case where $n=6$:
 \href{https://www.wolframalpha.com/input?i=residues+of+%28%28z%5E2-1%2Fz%5E2%29%2F%282i%29%29+*+%28z%5E6-1%2Fz%5E6%29%2F%282i%29+%2F+%281-%28%28z%2B1%2Fz%29%2F%282%29%29%5E2*gamma%5E2%29+*+%281%2F%28I*z%29%29}{link1},
@@ -501,9 +501,9 @@ is given by
 \[
 \boxed{
 \begin{aligned}
-B_{R,h,n}(R, \phi, z) &= N\frac{\mu_0I_0}{2\pi}\frac{z_0-z}{R}\left\{\frac{1}{\sqrt{R^2+R_{max}^2+(z_0-z)^2}}\right. + O[\epsilon(R_{max}, z_0)] \\
-&\qquad\qquad\qquad\qquad\left.-\frac{1}{\sqrt{R^2+R_{min}^2+(z_0-z)^2}} + O[\epsilon(R_{min}, z_0)]\right\}\times \\
-&\qquad\sum_{n=N}^{\infty}\qty{\qty(\frac{R}{2\sqrt{R+(z_0-z)^2}})^{n}+O\qty[\qty(\frac{R}{2\sqrt{R^2+(z_0-z)^2}})^{n+1}]}\sin(n\phi)
+B_{R,h,n}(R, \phi, z) &= N\frac{\mu_0I_0}{2\pi}\frac{z_0-z}{R}\left\{\frac{1}{\sqrt{R^2+R_{min}^2+(z_0-z)^2}}\right. + O[\epsilon(R_{max}, z_0)] \\
+&\qquad\qquad\qquad\qquad\left.-\frac{1}{\sqrt{R^2+R_{max}^2+(z_0-z)^2}} + O[\epsilon(R_{max}, z_0)]\right\}\times \\
+&\qquad\sum_{n=N}^{\infty}\qty{\qty(\frac{R}{2\sqrt{R^2+(z_0-z)^2}})^{n}+O\qty[\qty(\frac{R}{2\sqrt{R^2+(z_0-z)^2}})^{n+2}]}\sin(n\phi)
 \end{aligned}
 }
 \]
