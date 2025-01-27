@@ -218,20 +218,61 @@ B_{R, h, n}(R, z) &= -N\frac{\mu_0 I_0}{2 \pi}\frac{1}{R}\frac{z}{\sqrt{R^2+z^2}
 \end{aligned}\]
 we know that
 \[\begin{aligned}
-B_{z, h, n}(R, z) &= N\frac{\mu_0 I_0}{2 \pi}\frac{1}{z}\frac{R}{\sqrt{R^2+z^2}}\qty(\frac{\sqrt{R^2+z^2}-\abs{z}}{R})^n \\
+B_{z, h, n}(R, z) &= N\frac{\mu_0 I_0}{2 \pi}\frac{1}{R}\frac{R}{\sqrt{R^2+z^2}}\qty(\frac{\sqrt{R^2+z^2}-\abs{z}}{R})^n \\
 \end{aligned}\]
 
 \section{Full magnetic field}
 
 The full magnetic field is given by
-\[\mathbf{B}(R,\phi,z) = \vec{B}_{v}(R, \phi, z) + \vec{B}_h(R, \phi, z-h) - \vec{B}_h(R, \phi, z+h).\]
+\[\mathbf{B}(R,\phi,z) = N\vec{B}_{v}(R, \phi, z) + \vec{B}_h(R, \phi, z-h) - \vec{B}_h(R, \phi, z+h).\]
+Hence,
+\[\boxed{
+\begin{aligned}
+B_R(R,\phi,z) = N\frac{\mu_0 I_0}{2 \pi}\frac{1}{R}\sum_{n=N}^{\infty}&\left[\frac{h-z}{\sqrt{R^2+(z-h)^2}}\qty(\frac{\sqrt{R^2+(z-h)^2}-\abs{z-h}}{R})^n+\right. \\
+&\ \ \left.\frac{z+h}{\sqrt{R^2+(z+h)^2}}\qty(\frac{\sqrt{R^2+(z+h)^2}-\abs{z+h}}{R})^n\right]\sin(n\phi),
+\end{aligned}
+}\]
+\[\boxed{
+\begin{aligned}
+B_\phi(R,\phi,z) = N\frac{\mu_0 I_0}{2 \pi}\frac{1}{R}\Bigg\{1+\sum_{n=N}^{\infty}&\left[\qty(\frac{\sqrt{R^2+(z-h)^2}-\abs{z-h}}{R})^n+\right. \\
+&\ \ \left.\qty(\frac{\sqrt{R^2+(z+h)^2}-\abs{z+h}}{R})^n\right]\Bigg\}\cos(n\phi),
+\end{aligned}
+}\]
+\[\boxed{
+\begin{aligned}
+B_z(R,\phi,z) = N\frac{\mu_0 I_0}{2 \pi}\frac{1}{R}\sum_{n=N}^{\infty}&\left[\frac{R}{\sqrt{R^2+(z-h)^2}}\qty(\frac{\sqrt{R^2+(z-h)^2}-\abs{z-h}}{R})^n-\right. \\
+&\ \ \left.\frac{R}{\sqrt{R^2+(z+h)^2}}\qty(\frac{\sqrt{R^2+(z+h)^2}-\abs{z+h}}{R})^n\right]\sin(n\phi),
+\end{aligned}
+}\]
+for $n \bmod N =0$ and $-h<z<h$.
+
+\section{Check divergence is zero}
+
+\[\div{\vec{B}}=\frac{1}{R}\frac{\partial}{\partial R}(RB_R) + \frac{1}{R}\frac{\partial B_\phi}{\partial \phi} + \pdv{B_z}{z}.\]
+\[\begin{aligned}
+\frac{1}{R}\frac{\partial}{\partial R}(RB_{R,h,n}(R,z)) &= \frac{1}{R}\frac{\partial}{\partial R}\qty{-N\frac{\mu_0 I_0}{2 \pi}\frac{z}{\sqrt{R^2+z^2}}\qty(\frac{\sqrt{R^2+z^2}-\abs{z}}{R})^n} \\
+&= -N\frac{\mu_0 I_0}{2 \pi}\frac{z}{R}\frac{\partial}{\partial R}\qty{\frac{1}{\sqrt{R^2+z^2}}\qty(\frac{\sqrt{R^2+z^2}-\abs{z}}{R})^n} \\
+&= -N\frac{\mu_0 I_0}{2 \pi}\frac{z}{R}\left\{-\frac{R}{(R^2+z^2)^{3/2}}\qty(\frac{\sqrt{R^2+z^2}-\abs{z}}{R})^n + \right. \\
+&\qquad\qquad\qquad\qquad \left.n\frac{|z|\sqrt{R^2+z^2}-z^2}{R^2(R^2+z^2)}\qty(\frac{\sqrt{R^2+z^2}-\abs{z}}{R})^{n-1}\right\} \\
+&= -N\frac{\mu_0 I_0}{2 \pi}\frac{z}{R}\left\{-\frac{R}{(R^2+z^2)^{3/2}}\qty(\frac{\sqrt{R^2+z^2}-\abs{z}}{R})^n + \right. \\
+&\qquad\qquad\qquad\qquad \left.n\frac{|z|}{R(R^2+z^2)}\qty(\frac{\sqrt{R^2+z^2}-\abs{z}}{R})^{n}\right\} \\
+&= -N\frac{\mu_0 I_0}{2 \pi}\frac{1}{R}\left\{-\frac{zR}{(R^2+z^2)^{3/2}}\qty(\frac{\sqrt{R^2+z^2}-\abs{z}}{R})^n + \right. \\
+&\qquad\qquad\qquad\qquad \left.n\frac{|z|}{z}\frac{z^2}{R(R^2+z^2)}\qty(\frac{\sqrt{R^2+z^2}-\abs{z}}{R})^{n}\right\} \\
+\end{aligned}\]
+\[\begin{aligned}
+    \pdv{B_{z,h,n}(R,z)}{z}&=N\frac{\mu_0 I_0}{2 \pi}\frac{\partial}{\partial z}\qty{\frac{1}{\sqrt{R^2+z^2}}\qty(\frac{\sqrt{R^2+z^2}-\abs{z}}{R})^n} \\ 
+    &= N\frac{\mu_0 I_0}{2 \pi}\left\{-\frac{z}{(R^2+z^2)^{3/2}}\qty(\frac{\sqrt{R^2+z^2}-\abs{z}}{R})^n+\right. \\
+    &\qquad\qquad\qquad\left.n\frac{z|z|-z\sqrt{R^2+z^2}}{R|z|(R^2+z^2)}\qty(\frac{\sqrt{R^2+z^2}-\abs{z}}{R})^{n-1}\right\} \\
+    &= N\frac{\mu_0 I_0}{2 \pi}\left\{-\frac{z}{(R^2+z^2)^{3/2}}\qty(\frac{\sqrt{R^2+z^2}-\abs{z}}{R})^n-\right. \\
+    &\qquad\qquad\qquad\left.n\frac{z}{|z|(R^2+z^2)}\qty(\frac{\sqrt{R^2+z^2}-\abs{z}}{R})^{n}\right\} \\
+    &= N\frac{\mu_0 I_0}{2 \pi}\frac{1}{R}\left\{-\frac{zR}{(R^2+z^2)^{3/2}}\qty(\frac{\sqrt{R^2+z^2}-\abs{z}}{R})^n-\right. \\
+    &\qquad\qquad\qquad\left.n\frac{z}{|z|}\frac{R^2}{R(R^2+z^2)}\qty(\frac{\sqrt{R^2+z^2}-\abs{z}}{R})^{n}\right\}.
+\end{aligned}\]
 Hence,
 \[\begin{aligned}
-B_R(R,\phi,z) = N\frac{\mu_0 I_0}{2 \pi}\frac{1}{R}\sum_{n=N}^{\infty}&\left[\frac{h-z}{\sqrt{R^2+(z-h)^2}}\qty(\frac{\sqrt{R^2+(z-h)^2}-\abs{z-h}}{R})^n+\right. \\
-&\ \ \left.\frac{z+h}{\sqrt{R^2+(z+h)^2}}\qty(\frac{\sqrt{R^2+(z+h)^2}-\abs{z+h}}{R})\right]\sin(n\phi),
+    \frac{1}{R}\frac{\partial}{\partial R}(RB_{R,h,n}) + \pdv{B_{z,h,n}}{z} = -n\frac{z}{|z|}N\frac{\mu_0 I_0}{2 \pi}\frac{1}{R^2}\qty(\frac{\sqrt{R^2+z^2}-\abs{z}}{R})^{n}.
 \end{aligned}\]
-\[\begin{aligned}
-B_\phi(R,\phi,z) = N\frac{\mu_0 I_0}{2 \pi}\frac{1}{R}\sum_{n=N}^{\infty}&\left[\frac{h-z}{\sqrt{R^2+(z-h)^2}}\qty(\frac{\sqrt{R^2+(z-h)^2}-\abs{z-h}}{R})^n+\right. \\
-&\ \ \left.\frac{z+h}{\sqrt{R^2+(z+h)^2}}\qty(\frac{\sqrt{R^2+(z+h)^2}-\abs{z+h}}{R})\right]\sin(n\phi),
-\end{aligned}\]
+\[\implies \frac{1}{R}\frac{\partial}{\partial R}(RB_{R,h,n}) -\frac{n}{R}B_{\phi,h,n} + \pdv{B_{z,h,n}}{z} = 0,\]
+which confirms that the divergence of the magnetic field is zero.
+
 \end{document}
