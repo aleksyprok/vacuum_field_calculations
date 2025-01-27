@@ -1,0 +1,237 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\usepackage{amsmath}
+\usepackage{physics}
+\usepackage{dsfont}
+\usepackage{graphicx}
+\usepackage{hyperref}
+
+\let\vec\mathbf
+
+\geometry{margin = 2.5cm}
+
+\title{Analytic Approximation of the Vacuum Magnetic Field Induced by Infinitely Wide Picture Frame coils}
+\author{Alexander Prokopyshyn}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Magnetic field induced by a vertical wire centred at the origin}
+\label{sec:vertical_wire_at_origin}
+
+The magnetic field produce by a vertical wire, centred at the origin, with current, \(I_0\) which points in the 
+\(\vec{\hat{z}}\) direction and extends from \(-z_{min}, z_{max}\) is given by the following Biot-Savart law expression:
+\[\begin{aligned}
+    \vec{B}_{v}(R, \phi, z) &= \frac{\mu_0 I_0}{4\pi}\int_{z_{min}}^{z_{max}}\frac{\vec{dh'}\cross(R\vec{\hat{R}} + (z-z')\vec{\hat{z}})}{\qty(R^2+(z-z')^2)^{3/2}} \\
+    &= \frac{\mu_0 I_0}{4\pi}\int_{z_{min}}^{z_{max}}\frac{Rdh'\vec{\hat{\phi}}}{\qty(R^2+(z-z')^2)^{3/2}}.
+\end{aligned}
+\]
+Let
+\[\cos\theta = \frac{R}{\sqrt{R^2+(z-z')^2}},\]
+\[\implies \sin\theta = \frac{z-z'}{\sqrt{R^2+(z-z')^2}},\]
+\[\implies \tan \theta = \frac{z-z'}{R},\]
+\[\implies z' = z - R\tan\theta,\]
+\[\implies dz' = -R\sec^2\theta d\theta.\]
+Hence
+\[
+\begin{aligned}
+    \vec{B}_{v}(R, \phi, z) &= -\frac{\mu_0 I_0}{4\pi R}\int_{z_{min}}^{z_{max}}\cos\theta d\theta\vec{\hat{\phi}}\\
+    &= \frac{\mu_0 I_0}{4\pi R}\qty[-\sin\theta]_{z_{min}}^{z_{max}}\vec{\hat{\phi}}\\
+    &= \frac{\mu_0 I_0}{4\pi R}\qty[\frac{z_{max}-z}{\sqrt{R^2+(z_{max}-z)^2}} + \frac{z-z_{min}}{\sqrt{R^2+(z-z_{min})^2}}]\vec{\hat{\phi}}.
+\end{aligned}\]
+Let $z_{max}=h$ and $z_{min}=-h$:
+\[
+\boxed{\begin{aligned}
+    \vec{B}_{v}(R, \phi, z) &= -\frac{\mu_0 I_0}{4\pi R}\int_{z_{min}}^{z_{max}}\cos\theta d\theta\vec{\hat{\phi}}\\
+    &= \frac{\mu_0 I_0}{4\pi R}\qty[-\sin\theta]_{z_{min}}^{z_{max}}\vec{\hat{\phi}}\\
+    &= \frac{\mu_0 I_0}{4\pi R}\qty[\frac{h-z}{\sqrt{R^2+(h-z)^2}} + \frac{z+h}{\sqrt{R^2+(z+h)^2}}]\vec{\hat{\phi}}.
+\end{aligned}}\]
+
+\section{Magnetic field induced by a horizontal wire extending from the origin to infinity}
+
+Let $\vec{B}_{h,c, k}(x,y,z)$ denote the magnetic field induced by a horizontal
+wire in cartesian coordinates extending from the origin to infinity with current, $I_0$, in the
+\[\vec{\hat{R}}_k=\cos(\phi_k)\vec{\hat{x}} + \sin(\phi_k)\vec{\vec{\hat{y}}}\]
+direction, where
+\[\phi_k = k\frac{2\pi}{N},\]
+$N$ is the number of picture-frame coils. For $k=0$, $\vec{B}_{h,c,k}(x,y,z)$ points in the $\vec{\hat{x}}$ direction
+and is given by
+\[\begin{aligned}
+    \vec{B}_{h,c,0}(x, y, z) &= \frac{\mu_0 I_0}{4\pi}\frac{-z\vec{\hat{y}} + y\vec{\hat{z}}}{y^2+z^2}\left[1+\frac{x}{\sqrt{x^2+y^2+z^2}}.\right]
+\end{aligned}\]
+Let $\vec{B}_{h,k}$ denote the same magnetic field as $\vec{B}_{h,c,k}$ but in cylindrical coordinates. Then
+\[\begin{aligned}
+    \vec{B}_{h,0}(R, \phi, z) &= \frac{\mu_0 I_0}{4\pi}\frac{-z\sin\phi\vec{\hat{R}} -z\cos\phi\vec{\hat{\phi}} + R\sin\phi\vec{\hat{z}}}{R^2\sin^2\phi+z^2}\left[1+\frac{R\cos\phi}{\sqrt{R^2+z^2}}\right].
+\end{aligned}\]
+
+\section{Fourier series of the magnetic field induced by a horizontal wires extending from the origin to infinity}
+
+Let 
+\[\vec{B}_{h}(R,\phi,z)=\sum_{k=0}^{N-1}\vec{B}_{h,k}(R, \phi, z).\]
+We now wish to express
+\[\vec{B}_{h}(R,\phi,z)=B_{h, R}(R, \phi, z)\vec{\hat{R}} + B_{h, \phi}(R, \phi, z)\vec{\hat{\phi}} + B_{h, z}(R, \phi, z)\vec{\hat{z}},\]
+as a Fourier series in $\phi$. The picture-frame coils are positioned to ensure that $B_{h, R}$ and $B_{h, z}$ are odd
+functions of $\phi$ and $B_{h, \phi}$ is an even function of $\phi$. Hence
+\[B_{h,R}(R, \phi, z) = \sum_{n=N}^{\infty}B_{h, R, n}(R, z)\sin(n\phi),\]
+\[B_{h,\phi}(R, \phi, z) = \sum_{n=0}^{\infty}B_{h, \phi, n}(R, z)\cos(n\phi),\]
+\[B_{h, z}(R, \phi, z) = \sum_{n=N}^{\infty}B_{h, z, n}(R, z)\sin(n\phi).\]
+where $B_{h, R, n}(R, z)=B_{h, \phi, n}(R, z)=B_{h, z, n}(R, z)=0$ for $n \bmod N \ne 0$.
+To be clear, $B_{h, R, n}(R, z)\ne B_{h, R, n}(R, \phi, z)$, $B_{h, \phi, n}(R, z)\ne B_{h, \phi, n}(R, \phi, z)$,
+$B_{h, z, n}(R, z)\ne B_{h, z, n}(R, \phi, z)$. From this point on we will assume $n \bmod N = 0$.
+
+Note that
+\[\begin{aligned}
+B_{h, R, n}(R, z)&=\frac{1}{\pi}\int_{0}^{2\pi}B_{h, R}(R, \phi, z)\sin(n\phi)d\phi \\
+&= \frac{N}{\pi}\int_0^{2\pi} B_{h, R, 0}(R, \phi, z)\sin(n\phi)d\phi,
+\end{aligned}\]
+for $n \bmod N = 0$.
+\[\begin{aligned}
+B_{h, \phi, 0}(R, z)&=\frac{1}{2\pi}\int_{0}^{2\pi}B_{h, \phi}(R, \phi, z)d\phi \\
+&= \frac{N}{2\pi}\int_0^{2\pi} B_{h, \phi, 0}(R, \phi, z)d\phi,
+\end{aligned}\]
+\[\begin{aligned}
+B_{h, \phi, n}(R, z)&=\frac{1}{\pi}\int_{0}^{2\pi}B_{h, \phi}(R, \phi, z)\cos(n\phi)d\phi \\
+&= \frac{N}{\pi}\int_0^{2\pi} B_{h, \phi, 0}(R, \phi, z)\cos(n\phi)d\phi,
+\end{aligned}\]
+for $n \bmod N = 0$ and $n\ne0$.
+\[\begin{aligned}
+B_{h, z, n}(R, z)&=\frac{1}{\pi}\int_{0}^{2\pi}B_{h, z}(R, \phi, z)\sin(n\phi)d\phi \\
+&= \frac{N}{\pi}\int_0^{2\pi} B_{h, z, 0}(R, \phi, z)\sin(n\phi)d\phi,
+\end{aligned}\]
+for $n \bmod N = 0$.
+
+\subsection{Fourier coefficients of the radial component of the magnetic field}
+
+Our goal in this section is to calculate this integral
+\[\begin{aligned}
+B_{R, h, n}(R, z) &= \frac{N}{\pi}\int_0^{2\pi} B_{R, h, 0}(R, \phi, z)\sin(n\phi)d\phi \\
+&= -\frac{N}{\pi}\frac{\mu_0 I_0}{4 \pi}\int_0^{2\pi} \frac{z\sin\phi}{R^2\sin^2\phi+z^2}\qty(1+\frac{R\cos\phi}{\sqrt{R^2+z^2}})\sin(n\phi)d\phi \\
+&= -\frac{N}{\pi}\frac{\mu_0 I_0}{4 \pi}\frac{1}{R}\int_0^{2\pi} \frac{\Delta\sin\phi}{\sin^2\phi+\Delta^2}\qty(1+\frac{\cos\phi}{\sqrt{1+\Delta^2}})\sin(n\phi)d\phi.
+\end{aligned}\]
+Note that
+\[\int_{0}^{2\pi}\frac{\sin(\phi)\sin(n\phi)}{\sin^2\phi+\Delta^2}d\phi = 0,\]
+for $n$ odd.
+\[\begin{aligned}
+\int_{0}^{2\pi}\frac{\sin(\phi)\cos(\phi)\sin(n\phi)}{\sin^2\phi+\Delta^2}d\phi &= \frac{1}{2}\int_{0}^{2\pi}\frac{\sin(2\phi)\sin(n\phi)}{\sin^2\phi+\Delta^2}d\phi \\
+&=\int_{0}^{2\pi}\frac{\sin(2\phi)\sin(n\phi)}{1+2\Delta^2-\cos(2\phi)}d\phi. \\
+\end{aligned}\]
+Let
+\[\Delta^2 = \frac{(1-a)^2}{4a},\]
+\[a = \qty(\sqrt{1+\Delta^2}-\abs{\Delta})^2.\]
+Hence,
+\[\begin{aligned}
+\int_{0}^{2\pi}\frac{\sin(\phi)\cos(\phi)\sin(n\phi)}{\sin^2\phi+\Delta^2}d\phi &= 2\int_{0}^{2\pi}\frac{a\sin(2\phi)}{1+a^2-2a\cos(2\phi)}\sin(n\phi)d\phi. \\
+\end{aligned}\]
+Note that
+\[\begin{aligned}
+\frac{1}{1-a\exp(2i\phi)} &= \frac{1-a\cos(2\phi)}{1+a^2-2a\cos(2\phi)}+i\frac{a\sin(2\phi)}{1+a^2-2a\cos(2\phi)} \\
+&= \sum_{k=0}^{\infty}a^k\exp(2ik\phi).
+\end{aligned}\]
+Taking the imaginary part gives
+\[\frac{a\sin(2\phi)}{1+a^2-2a\cos(2\phi)}=\sum_{k=1}a^k\sin(2k\phi).\]
+Hence,
+\[\begin{aligned}
+\int_{0}^{2\pi}\frac{\sin(\phi)\cos(\phi)\sin(n\phi)}{\sin^2\phi+\Delta^2}d\phi &= 2\pi a^{n/2} \\
+&= 2\pi\qty(\sqrt{1+\Delta^2}-\abs{\Delta})^n
+\end{aligned}\]
+
+Therefore,
+\[\begin{aligned}
+B_{R, h, n}(R, z) &= -\frac{N}{\pi}\frac{\mu_0 I_0}{4 \pi}\frac{1}{R}\int_0^{2\pi} \frac{\Delta\sin\phi}{\sin^2\phi+\Delta^2}\qty(1+\frac{\cos\phi}{\sqrt{1+\Delta^2}})\sin(n\phi)d\phi \\
+&= -\frac{N}{\pi}\frac{\mu_0 I_0}{4 \pi}\frac{1}{R}\frac{\Delta}{\sqrt{1+\Delta^2}}2\pi\qty(\sqrt{1+\Delta^2}-\abs{\Delta})^n \\
+&= -N\frac{\mu_0 I_0}{2 \pi}\frac{1}{R}\frac{z}{\sqrt{R^2+z^2}}\qty(\frac{\sqrt{R^2+z^2}-\abs{z}}{R})^n \\
+\end{aligned}\]
+
+% Let
+% \[I_1 = \Delta\int_{0}^{2\pi}\frac{\sin\phi\sin (n\phi)}{\sin^2\phi+\Delta^2}d\phi,\]
+% \[I_2 = \frac{\Delta}{2\sqrt{1+\Delta^2}}\int_{0}^{2\pi}\frac{\sin(2\phi)\sin (n\phi)}{\sin^2\phi+\Delta^2}d\phi.\]
+% To solve $I_1$ and $I_2$ we use a trick where we use a trick where we let $Z=e^{i\phi}$ and substitute
+% \[\sin(n\phi) = \frac{Z^n+Z^{-n}}{2i}.\]
+% Then we take the integral over the unit circle $\abs{Z}=1$.
+
+\subsection{Fourier coefficients of the azimuthal component of the magnetic field}
+
+Our goal in this section is to calculate these integrals
+\[\begin{aligned}
+B_{h, \phi, 0}(R, z)&=\frac{1}{2\pi}\int_{0}^{2\pi}B_{h, \phi}(R, \phi, z)d\phi \\
+&= -\frac{N}{2\pi}\frac{\mu_0 I_0}{4 \pi}\int_0^{2\pi} \frac{z\cos\phi}{R^2\sin^2\phi+z^2}\qty(1+\frac{R\cos\phi}{\sqrt{R^2+z^2}})d\phi \\
+&= -\frac{N}{2\pi}\frac{\mu_0 I_0}{4 \pi}\frac{1}{R}\int_0^{2\pi} \frac{\Delta\cos\phi}{\sin^2\phi+\Delta^2}\qty(1+\frac{\cos\phi}{\sqrt{1+\Delta^2}})d\phi,
+\end{aligned}\]
+\[\begin{aligned}
+B_{h, \phi, n}(R, z)&=\frac{1}{\pi}\int_{0}^{2\pi}B_{h, \phi}(R, \phi, z)\cos(n\phi)d\phi \\
+&= -\frac{N}{\pi}\frac{\mu_0 I_0}{4 \pi}\int_0^{2\pi} \frac{z\cos\phi}{R^2\sin^2\phi+z^2}\qty(1+\frac{R\cos\phi}{\sqrt{R^2+z^2}})\cos(n\phi)d\phi \\
+&= -\frac{N}{\pi}\frac{\mu_0 I_0}{4 \pi}\frac{1}{R}\int_0^{2\pi} \frac{\Delta\cos\phi}{\sin^2\phi+\Delta^2}\qty(1+\frac{\cos\phi}{\sqrt{1+\Delta^2}})\cos(n\phi)d\phi,
+\end{aligned}\]
+for $n \bmod N = 0$ and $n\ne0$,
+where
+\[\Delta = z/R.\]
+Note that,
+\[\int_0^{2\pi} \frac{\cos\phi}{\sin^2\phi+\Delta^2}d\phi = 0,\]
+\[\int_0^{2\pi} \frac{\cos^2\phi}{\sin^2\phi+\Delta^2}d\phi = 2\pi\qty(\frac{\sqrt{1+\Delta^2}}{|\Delta|}-1).\]
+Hence,
+\[\begin{aligned}
+    B_{h, \phi, 0}(R, z)&=-\frac{N}{2\pi}\frac{\mu_0 I_0}{4 \pi}\frac{1}{R} \frac{\Delta}{\sqrt{1+\Delta^2}} 2\pi\qty(\frac{\sqrt{1+\Delta^2}}{|\Delta|}-1) \\
+    &= N\frac{\mu_0 I_0}{4 \pi}\frac{1}{R}\qty(\frac{z}{\sqrt{R^2+z^2}}-\frac{z}{|z|}).
+\end{aligned}
+\]
+
+Note that
+\[\int_0^{2\pi} \frac{\cos\phi}{\sin^2\phi+\Delta^2}\cos(n\phi)d\phi = 0,\]
+for $n$ even.
+\[\begin{aligned}
+\int_0^{2\pi} \frac{\cos^2\phi}{\sin^2\phi+\Delta^2}\cos(n\phi)d\phi &= \frac{2\pi}{|\Delta|}\sqrt{1 + \Delta^2}\qty(\sqrt{1+\Delta^2}-\abs{\Delta})^n,
+\end{aligned}\]
+for $n\ge 2$ and even. For proof, see \href{https://math.stackexchange.com/questions/5027889/how-to-express-int-pi-pi-frac-cos2x-cosnx-sin2xa2dx-as-a#5027947}{this stack exchange link}.
+Hence,
+\[\begin{aligned}
+    B_{h, \phi, n}(R, z)&=-\frac{N}{\pi}\frac{\mu_0 I_0}{4 \pi}\frac{1}{R} \frac{\Delta}{\sqrt{1+\Delta^2}} \frac{2\pi}{|\Delta|}\sqrt{1 + \Delta^2}\qty(\sqrt{1+\Delta^2}-\abs{\Delta})^n \\
+    &= -\frac{z}{\abs{z}}N\frac{\mu_0 I_0}{2 \pi}\frac{1}{R}\qty(\sqrt{1+\qty(\frac{z}{R})^2}-\abs{\frac{z}{R}})^n \\
+    &= -\frac{z}{\abs{z}}N\frac{\mu_0 I_0}{2 \pi}\frac{1}{R}\qty(\frac{\sqrt{R^2+z^2}-\abs{z}}{R})^n.
+\end{aligned}
+\]
+
+% Solutions to 
+% \[\int_0^{2\pi} \frac{\cos^2\phi}{\sin^2\phi+\Delta^2}\cos(n\phi)d\phi\]
+% are quite complicated and so we will take an asymptotic approach.
+% Note that
+% \[\begin{aligned}
+% \int_0^{2\pi} \frac{\cos^2\phi}{\sin^2\phi+\Delta^2}\cos(n\phi)d\phi &=R^2\int_0^{2\pi} \frac{\cos^2\phi\cos(n\phi)}{R^2+z^2-R^2\cos^2\phi}d\phi\\
+% &= \epsilon^2\int_0^{2\pi} \frac{\cos^2\phi\cos(n\phi)}{1-\epsilon^2\cos^2\phi}d\phi \\
+% &= \epsilon^2\qty(\frac{\pi}{2}\qty(\frac{\epsilon}{2} )^{n-2}+ O[\epsilon^{n}])
+% \end{aligned}\]
+
+\subsection{Fourier coefficients of the vertical component of the magnetic field}
+
+Our goal in this section is to calculate this integral
+\[\begin{aligned}
+B_{h, z, n}(R, z)&= \frac{N}{\pi}\int_0^{2\pi} B_{h, z, 0}(R, \phi, z)\sin(n\phi)d\phi \\
+&=\frac{N}{\pi}\frac{\mu_0 I_0}{4 \pi}\int_0^{2\pi} \frac{R\sin\phi}{R^2\sin^2\phi+z^2}\qty(1+\frac{R\cos\phi}{\sqrt{R^2+z^2}})\sin(n\phi)d\phi \\
+&= -\frac{R}{z}B_{h, R, n}(R, z)
+\end{aligned}\]
+for $n \bmod N = 0$.
+Since
+\[\begin{aligned}
+B_{R, h, n}(R, z) &= -N\frac{\mu_0 I_0}{2 \pi}\frac{1}{R}\frac{z}{\sqrt{R^2+z^2}}\qty(\frac{\sqrt{R^2+z^2}-\abs{z}}{R})^n \\
+\end{aligned}\]
+we know that
+\[\begin{aligned}
+B_{z, h, n}(R, z) &= N\frac{\mu_0 I_0}{2 \pi}\frac{1}{z}\frac{R}{\sqrt{R^2+z^2}}\qty(\frac{\sqrt{R^2+z^2}-\abs{z}}{R})^n \\
+\end{aligned}\]
+
+\section{Full magnetic field}
+
+The full magnetic field is given by
+\[\mathbf{B}(R,\phi,z) = \vec{B}_{v}(R, \phi, z) + \vec{B}_h(R, \phi, z-h) - \vec{B}_h(R, \phi, z+h).\]
+Hence,
+\[\begin{aligned}
+B_R(R,\phi,z) = N\frac{\mu_0 I_0}{2 \pi}\frac{1}{R}\sum_{n=N}^{\infty}&\left[\frac{h-z}{\sqrt{R^2+(z-h)^2}}\qty(\frac{\sqrt{R^2+(z-h)^2}-\abs{z-h}}{R})^n+\right. \\
+&\ \ \left.\frac{z+h}{\sqrt{R^2+(z+h)^2}}\qty(\frac{\sqrt{R^2+(z+h)^2}-\abs{z+h}}{R})\right]\sin(n\phi),
+\end{aligned}\]
+\[\begin{aligned}
+B_\phi(R,\phi,z) = N\frac{\mu_0 I_0}{2 \pi}\frac{1}{R}\sum_{n=N}^{\infty}&\left[\frac{h-z}{\sqrt{R^2+(z-h)^2}}\qty(\frac{\sqrt{R^2+(z-h)^2}-\abs{z-h}}{R})^n+\right. \\
+&\ \ \left.\frac{z+h}{\sqrt{R^2+(z+h)^2}}\qty(\frac{\sqrt{R^2+(z+h)^2}-\abs{z+h}}{R})\right]\sin(n\phi),
+\end{aligned}\]
+\end{document}
