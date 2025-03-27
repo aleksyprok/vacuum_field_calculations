@@ -1,0 +1,122 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\usepackage{amsmath}
+\usepackage{physics}
+\usepackage{dsfont}
+\usepackage{graphicx}
+\usepackage{hyperref}
+
+\let\vec\mathbf
+
+\geometry{margin = 2.5cm}
+
+\title{Approximate Fourier Series of the Magnetic Field Induced by a Single Picture-Frame Coil}
+\author{Alexander Prokopyshyn}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+In this document we will calculate the fourier series in toroidal angle, $\phi$, for
+a single picture-frame coil. The picture-frame coil is made up 
+of two infinitely long vertical wires which extend from $z\rightarrow-\infty$ to
+$z\rightarrow\infty$ and two horizontal wires which extend from
+$x=0$ to $x\rightarrow\infty$. The current in the vertical wires is $I_0$.
+Note that we use infinite wires to simplify the calculations. We will later show
+numerically that our values agree well with the exact values obtained numerically.
+We calculate for a single picture-frame coil, however, it's trivial to
+extend the results to $N$ picture-frame coils evenly space around a Tokamak.
+
+\section{Fourier series of vertical wire at $x=R_0$, $y=0$}
+\label{sec:vertical_wire_at_origin}
+
+The magnetic field induced by an infinite vertical wire at $x=R_0$ and $y=0$ is given by
+\[\begin{aligned}
+\vec{B}_v(R, \phi, z; R_0) &= \frac{\mu_0 I_0}{2\pi}\frac{-y\vec{\hat{x}}+(x-R_0)\vec{\hat{y}}}{(x-R_{0})^2+y^2} \\
+&= \frac{\mu_0 I_0}{2\pi R}\frac{-R_0 y\vec{\hat{R}}+(R^2-R_0 x)\vec{\hat{\phi}}}{(x-R_{0})^2+y^2} \\
+&= \frac{\mu_0 I_0}{2\pi R}\qty{\Im\qty[\frac{1}{1-(R_0/R)\exp(-i\phi)}]\vec{\hat{R}} + \Re\qty[\frac{1}{1-(R_0/R)\exp(-i\phi)}]\vec{\hat{\phi}}} \\
+&= -\frac{\mu_0 I_0}{2\pi R}\qty{\Im\qty[\frac{(R/R_0)\exp(i\phi)}{1-(R/R_0)\exp(i\phi)}]\vec{\hat{R}} + \Re\qty[\frac{(R/R_0)\exp(i\phi)}{1-(R/R_0)\exp(i\phi)}]\vec{\hat{\phi}}}.\\
+\end{aligned}\]
+where
+\[R=x^2+y^2,\]
+\[x=R\cos\phi,\]
+\[y=R\sin\phi,\]
+\[\vec{\hat{R}} = \frac{1}{R}[x\vec{\hat{x}}+y\vec{\hat{y}}],\]
+\[\vec{\hat{\phi}} = \frac{1}{R}[-y\vec{\hat{x}}+x\vec{\hat{y}}].\]
+Hence, using the formula for a geometric series,
+\[\begin{aligned}
+\vec{B}_v(R, \phi, z; R_0) &= 
+&= \frac{\mu_0 I_0}{2\pi R}\sum_{n=0}^{\infty}\qty{-\qty[\qty(\frac{R_0}{R})^n\sin(n\phi)]\vec{\hat{R}}+\qty[\qty(\frac{R_0}{R})^n\cos(n\phi)]\vec{\hat{\phi}}}.\\
+\end{aligned}\]
+for $R>R_0$ and
+\[\begin{aligned}
+\vec{B}_v(R, \phi, z; R_0) &= 
+&= -\frac{\mu_0 I_0}{2\pi R}\sum_{n=1}^{\infty}\qty{\qty[\qty(\frac{R}{R_0})^n\sin(n\phi)]\vec{\hat{R}}+\qty[\qty(\frac{R}{R_0})^n\cos(n\phi)]\vec{\hat{\phi}}},\\
+\end{aligned}\]
+for $R<R_0$.
+
+\section{Fourier series of horizontal wire at $y=z=0$}
+
+The magnetic field induced by a vertical which extends from
+$z=z_{min}$ to $z=z_{max}$ can be calculated using the Biot-Savart law to give
+\[
+\begin{aligned}
+    \vec{B}_{v}'(R, \phi, z) &= \frac{\mu_0 I_0}{4\pi R}\qty[\frac{z_{max}-z}{\sqrt{R^2+(z_{max}-z)^2}} + \frac{z-z_{min}}{\sqrt{R^2+(z-z_{min})^2}}]\vec{\hat{\phi}}.
+\end{aligned}\]
+Hence, the magnetic field induced by a horizontal wire at $y=z=0$ 
+and extends from $x=0$ to $x\rightarrow\infty$ is given by
+\[\begin{aligned}
+    \vec{B}_{h}(x, y, z) &= \frac{\mu_0 I_0}{4\pi}\frac{-z\vec{\hat{y}} + y\vec{\hat{z}}}{y^2+z^2}\left[1+\frac{x}{\sqrt{x^2+y^2+z^2}}.\right] \\
+    &= \frac{\mu_0 I_0}{4\pi}\frac{-z\sin\phi\vec{\hat{R}} -z\cos\phi\vec{\hat{\phi}} + R\sin\phi\vec{\hat{z}}}{R^2\sin^2\phi+z^2}\left[1+\frac{R\cos\phi}{\sqrt{R^2+z^2}}\right].
+\end{aligned}\]
+We can show that
+\[\begin{aligned}
+B_{R, h}(R, \phi, z) &= -\frac{\mu_0 I_0}{2 \pi}\frac{1}{R}\frac{z}{\sqrt{R^2+z^2}}\sum_{n=1}^{\infty}\qty(\frac{\sqrt{R^2+z^2}-\abs{z}}{R})^n\sin(n\phi), \\
+\end{aligned}\]
+\[\begin{aligned}
+    B_{\phi, h}(R, \phi, z)&=\frac{\mu_0 I_0}{2 \pi}\frac{1}{R}\qty{\frac{z}{2\sqrt{R^2+z^2}}-\frac{z}{2\abs{z}}-\frac{z}{\abs{z}}\sum_{n=1}^{\infty}\qty(\frac{\sqrt{R^2+z^2}-\abs{z}}{R})^n\cos(n\phi)},
+\end{aligned}
+\]
+\[\begin{aligned}
+B_{z, h}(R, \phi, z) &= \frac{\mu_0 I_0}{2 \pi}\frac{1}{R}\frac{R}{\sqrt{R^2+z^2}}\sum_{n=1}^\infty\qty(\frac{\sqrt{R^2+z^2}-\abs{z}}{R})^n\sin(n\phi). \\
+\end{aligned}\]
+To prove the above is quite involved, however, by going to the following
+Desmos link you can see for yourself that the above is almost certainly true:
+\url{https://www.desmos.com/calculator/xyl8dvtot4}.
+
+\section{Fourier series of a single picture-frame coil}
+
+Combing results from the previous section, we can write the magnetic field
+for a single picture-frame coil as
+\[\vec{B}(R,\phi, z) = \vec{B}_{v}(R, \phi, z; R_{inner}) - \vec{B}_{v}(R, \phi, z; R_{outer}) + \vec{B}_{h}(R, \phi, z-h) - \vec{B}_{h}(R, \phi, z+h),\]
+where $R_{inner}$ and $R_{outer}$ are the inner and outer radii of the picture-frame coil, respectively,
+and $h$ is the half the height of the picture-frame coil. We can write each component as
+\[\boxed{
+\begin{aligned}
+B_R(R,\phi,z) = \frac{\mu_0 I_0}{2 \pi R}\sum_{n=1}^{\infty}&\left[\qty(\frac{R_{outer}}{R})^n-\qty(\frac{R}{R_{inner}})^n+\right. \\
+&\ \ \frac{h-z}{\sqrt{R^2+(z-h)^2}}\qty(\frac{\sqrt{R^2+(z-h)^2}-(h-z)}{R})^n+ \\
+&\ \ \left.\frac{z+h}{\sqrt{R^2+(z+h)^2}}\qty(\frac{\sqrt{R^2+(z+h)^2}-(z+h)}{R})^n\right]\sin(n\phi),
+\end{aligned}
+}\]
+\[\boxed{
+\begin{aligned}
+B_\phi(R,\phi,z) = \frac{\mu_0 I_0}{2 \pi R}\Bigg\{1+\sum_{n=1}^{\infty}&\left[\qty(\frac{R}{R_{inner}})^n+ \qty(\frac{R_{outer}}{R})^n+\right. \\
+&\ \ \qty(\frac{\sqrt{R^2+(z-h)^2}-(h-z)}{R})^n+ \\
+&\ \ \left.\qty(\frac{\sqrt{R^2+(z+h)^2}-(z+h)}{R})^n\right]\cos(n\phi)\Bigg\},
+\end{aligned}
+}\]
+\[\boxed{
+\begin{aligned}
+B_z(R,\phi,z) = \frac{\mu_0 I_0}{2 \pi R}\sum_{n=1}^{\infty}&\left[\frac{R}{\sqrt{R^2+(z-h)^2}}\qty(\frac{\sqrt{R^2+(z-h)^2}-(h-z)}{R})^n-\right. \\
+&\ \ \left.\frac{R}{\sqrt{R^2+(z+h)^2}}\qty(\frac{\sqrt{R^2+(z+h)^2}-(z+h)}{R})^n\right]\sin(n\phi),
+\end{aligned}
+}\]
+for $R_{inner}<R<R_{outer}$, $-h<z<h$.
+Note that the $n=0$ term we set to $\frac{\mu_0 I_0}{2 \pi}\vec{\hat{\phi}}$,
+despite the forumula from the previous section suggesting otherwise.
+This is because we know the $n=0$ term from Ampere's law and the difference
+is caused by our use of infinite wires instead of finite wires.
+
+\end{document}
