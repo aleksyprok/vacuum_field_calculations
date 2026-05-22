@@ -95,14 +95,14 @@ where $R_{inner}$ and $R_{outer}$ are the inner and outer radii of the picture-f
 and $h$ is the half the height of the picture-frame coil. We can write each component as
 \[\boxed{
 \begin{aligned}
-B_R(R,\phi,z) = \frac{\mu_0 I_0}{2 \pi R}\sum_{n=1}^{\infty}&\left[\qty(\frac{R_{outer}}{R})^n-\qty(\frac{R}{R_{inner}})^n+\right. \\
+B_R(R,\phi,z) = \frac{\mu_0 I_0}{2 \pi R}\sum_{n=1}^{\infty}&\left[\qty(\frac{R}{R_{outer}})^n-\qty(\frac{R_{inner}}{R})^n+\right. \\
 &\ \ \frac{h-z}{\sqrt{R^2+(z-h)^2}}\qty(\frac{\sqrt{R^2+(z-h)^2}-(h-z)}{R})^n+ \\
 &\ \ \left.\frac{z+h}{\sqrt{R^2+(z+h)^2}}\qty(\frac{\sqrt{R^2+(z+h)^2}-(z+h)}{R})^n\right]\sin(n\phi),
 \end{aligned}
 }\]
 \[\boxed{
 \begin{aligned}
-B_\phi(R,\phi,z) = \frac{\mu_0 I_0}{2 \pi R}\Bigg\{1+\sum_{n=1}^{\infty}&\left[\qty(\frac{R}{R_{inner}})^n+ \qty(\frac{R_{outer}}{R})^n+\right. \\
+B_\phi(R,\phi,z) = \frac{\mu_0 I_0}{2 \pi R}\Bigg\{1+\sum_{n=1}^{\infty}&\left[\qty(\frac{R_{inner}}{R})^n+ \qty(\frac{R}{R_{outer}})^n+\right. \\
 &\ \ \qty(\frac{\sqrt{R^2+(z-h)^2}-(h-z)}{R})^n+ \\
 &\ \ \left.\qty(\frac{\sqrt{R^2+(z+h)^2}-(z+h)}{R})^n\right]\cos(n\phi)\Bigg\},
 \end{aligned}
@@ -118,5 +118,37 @@ Note that the $n=0$ term we set to $\frac{\mu_0 I_0}{2 \pi}\vec{\hat{\phi}}$,
 despite the formula from the previous section suggesting otherwise.
 This is because we know the $n=0$ term from Ampere's law and the difference
 is caused by our use of infinite wires instead of finite wires.
+
+\section{\texorpdfstring{Fourier series of finite length horizontal wire at $y=z=0$}{Fourier series of finite length horizontal wire at y=z=0}}
+
+and extends from $x=R_{min}$ to $x=R_{max}$ is given by
+\[
+\begin{aligned}
+    \vec{B}_{v}'(R, \phi, z) &= \frac{\mu_0 I_0}{4\pi R}\qty[\frac{z_{max}-z}{\sqrt{R^2+(z_{max}-z)^2}} + \frac{z-z_{min}}{\sqrt{R^2+(z-z_{min})^2}}]\vec{\hat{\phi}}.
+\end{aligned}\]
+\[\begin{aligned}
+    \vec{B}_{h} &= \frac{\mu_0 I_0}{4\pi}\frac{-z\vec{\hat{y}} + y\vec{\hat{z}}}{y^2+z^2}\left[\frac{R_{max}-x}{\sqrt{(R_{max}-x)^2+y^2+z^2}}+\frac{x-R_{min}}{\sqrt{(x-R_{min})^2+y^2+z^2}}.\right] \\
+    &= \frac{\mu_0 I_0}{4\pi R_{max}}\frac{-z'\vec{\hat{y}} + y'\vec{\hat{z}}}{y'^2+z'^2}\left[\frac{1-x'}{\sqrt{(1-x')^2+y'^2+z'^2}}+\frac{x'' - R_{min}''}{\sqrt{(x''-R_{min}'')^2+y''^2+z''^2}}.\right] \\
+    &= \frac{\mu_0 I_0}{4\pi R_{max}}\frac{-z'\sin\phi\vec{\hat{R}} -z'\cos\phi\vec{\hat{\phi}} + R'\sin\phi\vec{\hat{z}}}{R'^2\sin^2\phi+z'^2}\left[\frac{1-R'\cos(\phi)}{\sqrt{(1-R'\cos\phi)^2+R'^2\sin^2\phi+z'^2}}+\frac{\cos\phi-R_{min}''}{\sqrt{(\cos^2\phi-R_{min}'')^2+\sin^2\phi+z''^2}}\right] \\
+    &= \frac{\mu_0 I_0}{4\pi R_{max}}\frac{-z'\sin\phi\vec{\hat{R}} -z'\cos\phi\vec{\hat{\phi}} + R'\sin\phi\vec{\hat{z}}}{R'^2\sin^2\phi+z'^2}\left[\frac{1-R'\cos(\phi)}{\sqrt{1+R'^2+z'^2-2R'\cos(x)}}+\frac{\cos\phi-R_{min}''}{\sqrt{1+R_{min}''^2+z''^2-2R_{min}''\cos(x)}}\right].
+\end{aligned}\]
+where $'$ denotes divided by $R_{max}$, e.g. $x' = x/R_{max}$, $R' = R/R_{max}$, etc and
+$''$ denotes divided by $R$, e.g. $x'' = x/R$, $R_{min}'' = R_{min}/R$, etc.
+
+\section{Claim}
+
+Our claim is that 
+
+\[\begin{aligned}
+B_{R,n}(R,\phi,z)\le&\left[\qty(\frac{R}{R_{outer}})^n-\qty(\frac{R_{inner}}{R})^n+\right. \\
+&\ \ \frac{h-z}{\sqrt{R^2+(z-h)^2}}\qty(\frac{\sqrt{R^2+(z-h)^2}-(h-z)}{R})^n+ \\
+&\ \ \left.\frac{z+h}{\sqrt{R^2+(z+h)^2}}\qty(\frac{\sqrt{R^2+(z+h)^2}-(z+h)}{R})^n\right]
+\end{aligned}\]
+and
+\[\begin{aligned}
+B_{R,n}(R,\phi,z)\ge\max&\left[\qty(\frac{R}{R_{outer}})^n-\qty(\frac{R_{inner}}{R})^n,\right. \\
+&\quad\frac{h-z}{\sqrt{R^2+(z-h)^2}}\qty(\frac{\sqrt{R^2+(z-h)^2}-(h-z)}{R})^n+ \\
+&\quad\left.\frac{z+h}{\sqrt{R^2+(z+h)^2}}\qty(\frac{\sqrt{R^2+(z+h)^2}-(z+h)}{R})^n\right]
+\end{aligned}\]
 
 \end{document}
